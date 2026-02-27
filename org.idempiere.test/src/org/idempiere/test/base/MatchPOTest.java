@@ -1110,7 +1110,7 @@ public class MatchPOTest extends AbstractTestCase {
 		assertEquals(DocAction.STATUS_Completed, invoice.getDocStatus());
 		if (!invoice.isPosted()) {
 			String error = DocumentEngine.postImmediate(Env.getCtx(), invoice.getAD_Client_ID(), MInvoice.Table_ID, invoice.get_ID(), false, getTrxName());
-			assertTrue(error == null, error);
+			assertNull(error, error);
 		}
 		invoice.load(getTrxName());
 		assertTrue(invoice.isPosted());
@@ -1202,7 +1202,7 @@ public class MatchPOTest extends AbstractTestCase {
 		assertEquals(DocAction.STATUS_Completed, invoice1.getDocStatus());
 		if (!invoice1.isPosted()) {
 			String error = DocumentEngine.postImmediate(Env.getCtx(), invoice1.getAD_Client_ID(), MInvoice.Table_ID, invoice1.get_ID(), false, getTrxName());
-			assertTrue(error == null, error);
+			assertNull(error, error);
 		}
 		invoice1.load(getTrxName());
 		assertTrue(invoice1.isPosted());
@@ -1232,7 +1232,7 @@ public class MatchPOTest extends AbstractTestCase {
 		assertEquals(DocAction.STATUS_Completed, invoice2.getDocStatus());
 		if (!invoice2.isPosted()) {
 			String error = DocumentEngine.postImmediate(Env.getCtx(), invoice2.getAD_Client_ID(), MInvoice.Table_ID, invoice2.get_ID(), false, getTrxName());
-			assertTrue(error == null, error);
+			assertNull(error, error);
 		}
 		invoice2.load(getTrxName());
 		assertTrue(invoice2.isPosted());
