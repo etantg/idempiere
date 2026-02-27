@@ -2089,8 +2089,7 @@ public class MInOut extends X_M_InOut implements DocAction, IDocsPostProcess
 								return DocAction.STATUS_Invalid;
 							}
 							if (po.getQty().compareTo(matchQty) != 0) {
-								// Existing Match POs are set to Deferred if they are not matched to a receipt
-								// Post all deferred Match POs except the current Match PO
+								// Post deferred Match POs already linked to a receipt (excluding the current Match PO)
 								String whereClause = "C_OrderLine_ID=? AND Posted=? AND M_MatchPO_ID<>? AND M_InOutLine_ID IS NOT NULL";
 								List<MMatchPO> mpos = new Query(getCtx(), MMatchPO.Table_Name, whereClause, get_TrxName())
 										.setParameters(po.getC_OrderLine_ID(), Doc.STATUS_Deferred, po.getM_MatchPO_ID())
