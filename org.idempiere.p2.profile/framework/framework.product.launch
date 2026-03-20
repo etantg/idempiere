@@ -456,6 +456,8 @@
         <setEntry value="org.adempiere.base@default:default"/>
         <setEntry value="org.adempiere.eclipse.equinox.http.servlet@default:true"/>
         <setEntry value="org.adempiere.install@default:default"/>
+        <setEntry value="org.adempiere.pipo.handlers@default:default"/>
+        <setEntry value="org.adempiere.pipo@default:default"/>
         <setEntry value="org.adempiere.plugin.utils@default:default"/>
         <setEntry value="org.adempiere.report.jasper.library@default:false"/>
         <setEntry value="org.adempiere.report.jasper@default:default"/>
@@ -468,7 +470,9 @@
         <setEntry value="org.idempiere.felix.webconsole@default:true"/>
         <setEntry value="org.idempiere.hazelcast.service@default:default"/>
         <setEntry value="org.idempiere.jetty.osgi.boot.fragment@default:false"/>
-		<setEntry value="org.idempiere.zk.billboard@default:default"/>
+        <setEntry value="org.idempiere.tablepartition@default:default"/>
+        <setEntry value="org.idempiere.ui.sso.oidc@default:default"/>
+        <setEntry value="org.idempiere.zk.billboard@default:default"/>
         <setEntry value="org.idempiere.zk.breeze.theme@default:false"/>
         <setEntry value="org.idempiere.zk.extra@default:default"/>
         <setEntry value="org.idempiere.zk.iceblue_c.theme@default:false"/>

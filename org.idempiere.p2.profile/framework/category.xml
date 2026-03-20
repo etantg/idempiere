@@ -64,5 +64,11 @@
             id="org.idempiere.equinox.p2.director.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>
    </feature>
+   
+   <!-- Pack-In / Pack-Out -->
+   <feature url="features/org.adempiere.pipo.feature_14.0.0.qualifier.jar"
+            id="org.adempiere.pipo.feature" version="14.0.0.qualifier">
+      <category name="idempiere.server"/>
+   </feature>
 
 </site>

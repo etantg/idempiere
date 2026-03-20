@@ -85,9 +85,9 @@
 
 		<!-- ══════════════════════════════════════════════════════════
 		     PROFILE: framework
-		     Core OSGi platform only (~32 modules).
-		     Excludes: webservices, payment, replication, pipo, SSO,
-		     tablepartition, optional UI widgets, and all dev/test.
+		     Core OSGi platform only (~36 modules).
+		     Excludes: webservices, payment processor, replication, 
+			 optional UI widgets, and all dev/test.
 
 		     Build:     mvn clean package -P framework
 		     Installer: iDempiere-Framework-<version>-<os>.zip
@@ -129,15 +129,23 @@
 				<module>org.idempiere.felix.webconsole</module>
 				<module>org.apache.ecs</module>
 				<module>org.idempiere.bouncy.castle-feature</module>
+				<module>org.idempiere.tablepartition</module>
 				
 				<!-- Installation -->
 				<module>org.adempiere.install</module>
 				<module>org.adempiere.plugin.utils</module>
+				
+				<!-- Pack-In / Pack-Out -->
+				<module>org.adempiere.pipo</module>
+				<module>org.adempiere.pipo.handlers</module>
+
+				<!-- SSO -->
+				<module>org.idempiere.ui.sso.oidc</module>
 
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.adempiere.server-feature</module>
+				<module>org.idempiere.framework.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>
@@ -157,8 +165,8 @@
 		<!-- ══════════════════════════════════════════════════════════
 		     PROFILE: erp
 		     Full iDempiere installation (~53 modules).
-		     Framework + webservices, payment, replication, pipo,
-		     SSO, tablepartition, and all optional UI widgets.
+		     Framework + webservices, payment processor, replication,
+		     and all optional UI widgets.
 		     Excludes only dev/test tooling.
 
 		     Build:     mvn clean package -P erp
@@ -218,7 +226,7 @@
 				<module>org.idempiere.webservices.resources</module>
 				<module>org.idempiere.webservices.client-feature</module>
 
-				<!-- Payment -->
+				<!-- Payment Processor -->
 				<module>org.adempiere.payment.processor</module>
 
 				<!-- Replication -->
@@ -235,7 +243,7 @@
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.adempiere.server-feature</module>
+				<module>org.idempiere.framework.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>
@@ -322,7 +330,7 @@
 				<module>org.idempiere.webservices.resources</module>
 				<module>org.idempiere.webservices.client-feature</module>
 
-				<!-- Payment -->
+				<!-- Payment Processor -->
 				<module>org.adempiere.payment.processor</module>
 
 				<!-- Replication -->
@@ -339,7 +347,7 @@
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.adempiere.server-feature</module>
+				<module>org.idempiere.framework.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>

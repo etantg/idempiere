@@ -74,7 +74,7 @@
       <category name="idempiere.server"/>
    </feature>
 
-   <!-- ERP: Payment -->
+   <!-- ERP: Payment Processor -->
    <feature url="features/org.adempiere.payment.processor.feature_14.0.0.qualifier.jar"
             id="org.adempiere.payment.processor.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>
@@ -90,7 +90,7 @@
       <category name="idempiere.server"/>
    </feature>
 
-   <!-- ERP: Pack-In / Pack-Out -->
+   <!-- Pack-In / Pack-Out -->
    <feature url="features/org.adempiere.pipo.feature_14.0.0.qualifier.jar"
             id="org.adempiere.pipo.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>

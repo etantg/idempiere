@@ -70,6 +70,8 @@
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
   <plugin id="org.apache.ecs"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+  <plugin id="org.idempiere.tablepartition"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
   <!-- Installation -->
   <plugin id="org.adempiere.install"
@@ -77,4 +79,14 @@
   <plugin id="org.adempiere.plugin.utils"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
+  <!-- Pack-In / Pack-Out -->
+  <plugin id="org.adempiere.pipo"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+  <plugin id="org.adempiere.pipo.handlers"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+
+  <!-- SSO / OIDC -->
+  <plugin id="org.idempiere.ui.sso.oidc"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+		  
 </feature>

@@ -41,7 +41,7 @@
   <plugin id="org.idempiere.webservices.resources"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
-  <!-- Payment Processing -->
+  <!-- Payment Processor -->
   <plugin id="org.adempiere.payment.processor"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
@@ -49,20 +49,6 @@
   <plugin id="org.adempiere.replication"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
   <plugin id="org.adempiere.replication.server"
-          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-
-  <!-- Pack-In / Pack-Out -->
-  <plugin id="org.adempiere.pipo"
-          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-  <plugin id="org.adempiere.pipo.handlers"
-          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-
-  <!-- SSO / OIDC -->
-  <plugin id="org.idempiere.ui.sso.oidc"
-          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-
-  <!-- Infrastructure -->
-  <plugin id="org.idempiere.tablepartition"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
 </feature>
