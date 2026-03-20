@@ -85,7 +85,7 @@
 
 		<!-- ══════════════════════════════════════════════════════════
 		     PROFILE: framework
-		     Core OSGi platform only (~36 modules).
+		     Core OSGi platform only (~40 modules).
 		     Excludes: webservices, payment processor, replication, 
 			 optional UI widgets, and all dev/test.
 
@@ -153,7 +153,8 @@
 				<module>org.idempiere.zk-feature</module>
 				<module>org.idempiere.eclipse.platform-feature</module>
 				<module>org.idempiere.equinox.p2.director-feature</module>
-				
+				<module>org.adempiere.pipo-feature</module>
+								
 				<!-- Profile features -->
 				<module>org.idempiere.p2.profile/features/framework</module>
 
@@ -164,7 +165,7 @@
 
 		<!-- ══════════════════════════════════════════════════════════
 		     PROFILE: erp
-		     Full iDempiere installation (~53 modules).
+		     Full iDempiere installation (~57 modules).
 		     Framework + webservices, payment processor, replication,
 		     and all optional UI widgets.
 		     Excludes only dev/test tooling.
@@ -268,7 +269,7 @@
 
 		<!-- ══════════════════════════════════════════════════════════
 		     PROFILE: developer
-		     Everything (~57 modules).
+		     Everything (~62 modules).
 		     Full ERP + test bundle, test feature, javadoc, and
 		     coverage report. Used by CI and contributors.
 		     Does NOT produce a production installer.
