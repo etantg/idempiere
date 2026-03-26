@@ -4634,6 +4634,9 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 				assertNull(error, error);
 			} 
 			
+			validateProductCostQty(ass, product1);
+			validateProductCostQty(ass, product2);
+			
 			MMatchInv[] miList = MMatchInv.getInvoice(Env.getCtx(), invoice.get_ID(), getTrxName());
 			assertEquals(2, miList.length);
 			for (MMatchInv mi : miList) {
@@ -10345,6 +10348,9 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 			assertNotNull(cost1, "No MCost record found");
 			assertNotNull(cost2, "No MCost record found");			
 			assertEquals(cost1.getCurrentQty().setScale(2, RoundingMode.HALF_UP), cost2.getCurrentQty().setScale(2, RoundingMode.HALF_UP), "Unexpected current quantity");
+			
+			List<MCostDetail> cds = MCostDetail.list(Env.getCtx(), "M_Product_ID=? AND Processed='N'", product.get_ID(), 0, as.getC_AcctSchema_ID(), getTrxName());
+			assertTrue(cds.isEmpty());
 		}
 	}
 	

@@ -758,9 +758,9 @@ public class DocManager {
 		
 		// re-post all the documents after the back-date transaction
 		List<String> repostedRecordIds = new ArrayList<String>();
-		// skip repost the back-date transaction
-		String lastPostedRecordId = AD_Table_ID + "_" + Record_ID;
-		repostedRecordIds.add(lastPostedRecordId);
+		// NOTE: Do not skip repost the back-date transaction
+		// All the cost detail records after the back-date transaction were set to unprocessed
+    	// If skip repost the back-date transaction, some records might remains unprocessed
 		
 		StringBuilder selectSql = new StringBuilder();
 		selectSql.append("SELECT mpo.M_MatchPO_ID, il.C_Invoice_ID, iol.M_InOut_ID, mi.M_MatchInv_ID, invl.M_Inventory_ID, ");
@@ -847,7 +847,6 @@ public class DocManager {
 					String error = DocManager.postDocument(ass, tableID, recordID, true, true, true, trxName);
 					if (error != null)
 						return error;
-					lastPostedRecordId = tableID + "_" + recordID;
 				}
 								
 				if (tableID == MInvoice.Table_ID) { 
@@ -867,8 +866,6 @@ public class DocManager {
 						}
 						if (mi.getDateAcct().compareTo(cd.getDateAcct()) < 0)
 							continue;
-						if (lastPostedRecordId.equals(MMatchInv.Table_ID + "_" + mi.get_ID()))
-							continue;
 						// NOTE: Do not skip reposting match invoices that have already been reposted
 						String error = DocManager.postDocument(ass, MMatchInv.Table_ID, mi.get_ID(), true, true, true, trxName);
 						if (error != null) {
@@ -876,7 +873,6 @@ public class DocManager {
 								s_log.info("Error Posting TableID=" + MMatchInv.Table_ID + ", RecordID=" + mi.get_ID() + " Error: " + error);
 							return error;
 						}
-						lastPostedRecordId = MMatchInv.Table_ID + "_" + mi.get_ID();
 					}
 				}
     		}
