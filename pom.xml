@@ -85,16 +85,16 @@
 	<profiles>
 
 		<!-- ══════════════════════════════════════════════════════════
-		     PROFILE: framework
-		     Core OSGi platform only (~40 modules).
+		     PROFILE: core
+		     Core OSGi platform only (~41 modules).
 		     Excludes: webservices, payment processor, replication, 
 			 optional UI widgets, and all dev/test.
 
-		     Build:     mvn clean package -P framework
-		     Installer: iDempiere-Framework-<version>-<os>.zip
+		     Build:     mvn clean package -P core
+		     Installer: iDempiere-Core-<version>-<os>.zip
 		     ══════════════════════════════════════════════════════════ -->
 		<profile>
-			<id>framework</id>
+			<id>core</id>
 			<modules>
 				<!-- Build infrastructure -->
 				<module>org.idempiere.p2.targetplatform</module>
@@ -111,6 +111,7 @@
 				<module>org.idempiere.zk.breeze.theme</module>
 				<module>org.idempiere.zk.iceblue_c.theme</module>
 				<module>javax.websocket-api.fragment</module>
+				<module>org.idempiere.printformat.editor</module>
 
 				<!-- Application Server -->
 				<module>org.adempiere.server</module>
@@ -146,7 +147,7 @@
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.idempiere.framework.runtime-feature</module>
+				<module>org.idempiere.core.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>
@@ -157,25 +158,25 @@
 				<module>org.adempiere.pipo-feature</module>
 								
 				<!-- Profile features -->
-				<module>org.idempiere.p2.profile/features/framework</module>
+				<module>org.idempiere.p2.profile/features/core</module>
 
 				<!-- P2 repository + installer -->
-				<module>org.idempiere.p2.profile/framework</module>
+				<module>org.idempiere.p2.profile/core</module>
 			</modules>
 		</profile>
 
 		<!-- ══════════════════════════════════════════════════════════
-		     PROFILE: erp
+		     PROFILE: extended
 		     Full iDempiere installation (~57 modules).
-		     Framework + webservices, payment processor, replication,
+		     Core + webservices, payment processor, replication,
 		     and all optional UI widgets.
 		     Excludes only dev/test tooling.
 
-		     Build:     mvn clean package -P erp
-		     Installer: iDempiere-ERP-<version>-<os>.zip
+		     Build:     mvn clean package -P extended
+		     Installer: iDempiere-Extended-<version>-<os>.zip
 		     ══════════════════════════════════════════════════════════ -->
 		<profile>
-			<id>erp</id>
+			<id>extended</id>
 			<modules>
 				<!-- Build infrastructure -->
 				<module>org.idempiere.p2.targetplatform</module>
@@ -245,7 +246,7 @@
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.idempiere.framework.runtime-feature</module>
+				<module>org.idempiere.core.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>
@@ -260,26 +261,26 @@
 				<module>org.adempiere.pipo-feature</module>
 				
 				<!-- Profile features -->
-				<module>org.idempiere.p2.profile/features/framework</module>
-				<module>org.idempiere.p2.profile/features/erp</module>
+				<module>org.idempiere.p2.profile/features/core</module>
+				<module>org.idempiere.p2.profile/features/extended</module>
 
 				<!-- P2 repository + installer -->
-				<module>org.idempiere.p2.profile/erp</module>
+				<module>org.idempiere.p2.profile/extended</module>
 			</modules>
 		</profile>
 
 		<!-- ══════════════════════════════════════════════════════════
-		     PROFILE: developer
+		     PROFILE: full
 		     Everything (~62 modules).
 		     Full ERP + test bundle, test feature, javadoc, and
 		     coverage report. Used by CI and contributors.
 		     Does NOT produce a production installer.
 
-		     Build:      mvn clean package -P developer
-		     Build+test: mvn clean verify -P developer
+		     Build:      mvn clean package -P full
+		     Build+test: mvn clean verify -P full
 		     ══════════════════════════════════════════════════════════ -->
 		<profile>
-			<id>developer</id>
+			<id>full</id>
 			<modules>
 				<!-- Build infrastructure -->
 				<module>org.idempiere.p2.targetplatform</module>
@@ -349,7 +350,7 @@
 				<!-- Features -->
 				<module>org.adempiere.base-feature</module>
 				<module>org.adempiere.ui.zk-feature</module>
-				<module>org.idempiere.framework.runtime-feature</module>
+				<module>org.idempiere.core.runtime-feature</module>
 				<module>org.adempiere.report.jasper-feature</module>
 				<module>org.compiere.db.provider-feature</module>
 				<module>org.idempiere.hazelcast.service-feature</module>
@@ -370,12 +371,12 @@
 				<module>coverage-report</module>
 				
 				<!-- Profile features -->
-				<module>org.idempiere.p2.profile/features/framework</module>
-				<module>org.idempiere.p2.profile/features/erp</module>
-				<module>org.idempiere.p2.profile/features/developer</module>
+				<module>org.idempiere.p2.profile/features/core</module>
+				<module>org.idempiere.p2.profile/features/extended</module>
+				<module>org.idempiere.p2.profile/features/full</module>
 
-				<!-- P2 repository (no installer for developer) -->
-				<module>org.idempiere.p2.profile/developer</module>
+				<!-- P2 repository (no installer for full) -->
+				<module>org.idempiere.p2.profile/full</module>
 			</modules>
 		</profile>
 

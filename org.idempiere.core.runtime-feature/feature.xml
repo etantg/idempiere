@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.idempiere.core.runtime.feature"
+      label="iDempiere Core Runtime"
+      version="14.0.0.qualifier"
+      provider-name="iDempiere Community">
+
+   <description url="https://www.idempiere.org">
+      Provides iDempiere server setup scripts, Jetty web server runtime,
+      and all required core bundle dependencies. ERP-specific bundles
+      (payment, replication, webservices, optional UI widgets) excluded.
+   </description>
+
+   <copyright url="https://www.idempiere.org">
+      Copyright (C) 1999-2024 iDempiere Community
+   </copyright>
+
+   <license url="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">
+      GNU General Public License Version 2
+   </license>
+
+   <!-- From org.adempiere.ui.zk-feature -->
+   <plugin id="org.adempiere.ui.zk" version="0.0.0"/>
+   <plugin id="org.atmosphere.runtime" version="0.0.0"/>
+   <plugin id="org.idempiere.printformat.editor" version="0.0.0"/>
+   <plugin id="org.idempiere.zk.billboard" version="0.0.0"/>
+   <plugin id="org.idempiere.zk.breeze.theme" version="0.0.0"/>
+   <plugin id="org.idempiere.zk.iceblue_c.theme" version="0.0.0"/>
+   <plugin id="javax.websocket-api.fragment" version="0.0.0"/>
+
+   <!-- From org.idempiere.zk-feature -->
+   <plugin id="zcommon" version="0.0.0"/>
+   <plugin id="zel" version="0.0.0"/>
+   <plugin id="zhtml" version="0.0.0"/>
+   <plugin id="zk" version="0.0.0"/>
+   <plugin id="zkbind" version="0.0.0"/>
+   <plugin id="zkplus" version="0.0.0"/>
+   <plugin id="zul" version="0.0.0"/>
+   <plugin id="zweb" version="0.0.0"/>
+   <plugin id="org.idempiere.zk.extra" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-fileupload" version="0.0.0"/>
+   <plugin id="zkwebfragment" version="0.0.0"/>
+   <plugin id="zweb-dsp" version="0.0.0"/>
+   <plugin id="org.zkoss.zsoup" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-fileupload2-core" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-fileupload2-javax" version="0.0.0"/>
+
+   <!-- From org.adempiere.report.jasper-feature -->
+   <plugin id="org.adempiere.report.jasper" version="0.0.0"/>
+   <plugin id="org.adempiere.report.jasper.library" version="0.0.0"/>
+   <plugin id="bcmail" version="0.0.0"/>
+   <plugin id="jaxen" version="0.0.0"/>
+   <plugin id="org.apache.servicemix.bundles.rhino" version="0.0.0"/>
+   <plugin id="net.sf.jasperreports.engine" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.core.jackson-annotations" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.core.jackson-core" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.core.jackson-databind" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.dataformat.jackson-dataformat-xml" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.datatype.jackson-datatype-guava" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.datatype.jackson-datatype-joda" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.jaxrs.jackson-jaxrs-base" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.jaxrs.jackson-jaxrs-xml-provider" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.module.jackson-module-jaxb-annotations" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.module.jackson-module-jsonSchema" version="0.0.0"/>
+   <plugin id="com.fasterxml.woodstox.woodstox-core" version="0.0.0"/>
+   <plugin id="javax.validation.api" version="0.0.0"/>
+   <plugin id="jakarta.ws.rs-api" version="0.0.0"/>
+   <plugin id="com.fasterxml.jackson.datatype.jackson-datatype-json-org" version="0.0.0"/>
+   <plugin id="json" version="0.0.0"/>
+   <plugin id="stax2-api" version="0.0.0"/>
+   <plugin id="com.sun.xml.bind.external.relaxng-datatype" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.lucene.lucene-analyzers-common" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.lucene.lucene-core" version="0.0.0"/>
+   <plugin id="org.apache.commons.digester" version="0.0.0"/>
+
+   <!-- From org.compiere.db.provider-feature -->
+   <plugin id="org.compiere.db.oracle.provider" version="0.0.0"/>
+   <plugin id="org.compiere.db.postgresql.provider" version="0.0.0"/>
+   <plugin id="org.postgresql.jdbc" version="0.0.0"/>
+   <plugin id="com.zaxxer.HikariCP" version="0.0.0"/>
+   <plugin id="wrapped.com.oracle.database.jdbc.ojdbc17" version="0.0.0"/>
+   <plugin id="org.idempiere.tablepartition" version="0.0.0"/>
+
+   <!-- From org.idempiere.hazelcast.service-feature -->
+   <plugin id="org.idempiere.hazelcast.service" version="0.0.0"/>
+
+   <!-- From org.idempiere.felix.webconsole-feature -->
+   <plugin id="org.apache.felix.webconsole" version="0.0.0"/>
+   <plugin id="org.idempiere.felix.webconsole" version="0.0.0"/>
+
+   <!-- From org.adempiere.pipo-feature -->
+   <plugin id="org.adempiere.pipo" version="0.0.0"/>
+   <plugin id="org.adempiere.pipo.handlers" version="0.0.0"/>
+   <plugin id="org.adempiere.plugin.utils" version="0.0.0"/>
+
+   <!-- From org.adempiere.base-feature -->
+   <plugin id="org.adempiere.base" version="0.0.0"/>
+   <plugin id="org.adempiere.base.callout" version="0.0.0"/>
+   <plugin id="org.adempiere.base.process" version="0.0.0"/>
+   <plugin id="org.adempiere.ui" version="0.0.0"/>
+   <plugin id="org.apache.ecs" version="0.0.0"/>
+   <plugin id="org.apache.ant" version="0.0.0"/>
+   <plugin id="org.junit" version="0.0.0"/>
+   <plugin id="org.apache.servicemix.bundles.cglib" version="0.0.0"/>
+   <plugin id="org.apache.commons.collections" version="0.0.0"/>
+   <plugin id="org.apache.commons.logging" version="0.0.0"/>
+   <plugin id="org.apache.xml.resolver" version="0.0.0"/>
+   <plugin id="org.apache.servicemix.bundles.xerces" version="0.0.0"/>
+   <plugin id="org.apache.xml.serializer" version="0.0.0"/>
+   <plugin id="org.mortbay.jasper.apache-el" version="0.0.0"/>
+   <plugin id="org.adempiere.install" version="0.0.0"/>
+   <plugin id="org.hamcrest.core" version="0.0.0"/>
+   <plugin id="org.passay" version="0.0.0"/>
+   <plugin id="net.sf.supercsv.super-csv" version="0.0.0"/>
+   <plugin id="org.apache.commons.lang" version="0.0.0"/>
+   <plugin id="com.ibm.icu" version="0.0.0"/>
+   <plugin id="joda-time" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-collections4" version="0.0.0"/>
+   <plugin id="wrapped.xalan.xalan" version="0.0.0"/>
+   <plugin id="org.apache.commons.lang3" version="0.0.0"/>
+   <plugin id="org.apache.geronimo.specs.geronimo-j2ee-management_1.1_spec" version="0.0.0"/>
+   <plugin id="jakarta.annotation-api" version="0.0.0"/>
+   <plugin id="groovy" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-configuration2" version="0.0.0"/>
+   <plugin id="groovy-console" version="0.0.0"/>
+   <plugin id="groovy-datetime" version="0.0.0"/>
+   <plugin id="groovy-json" version="0.0.0"/>
+   <plugin id="groovy-jsr223" version="0.0.0"/>
+   <plugin id="groovy-nio" version="0.0.0"/>
+   <plugin id="groovy-xml" version="0.0.0"/>
+   <plugin id="com.sun.activation.jakarta.activation" version="0.0.0"/>
+   <plugin id="com.sun.mail.gimap" version="0.0.0"/>
+   <plugin id="com.sun.mail.jakarta.mail" version="0.0.0"/>
+   <plugin id="jakarta.xml.bind-api" version="0.0.0"/>
+   <plugin id="groovy-sql" version="0.0.0"/>
+   <plugin id="com.github.librepdf.openpdf" version="0.0.0"/>
+   <plugin id="com.github.librepdf.openpdf-fonts-extra" version="0.0.0"/>
+   <plugin id="org.glassfish.hk2.external.jakarta.inject" version="0.0.0"/>
+   <plugin id="org.apache.geronimo.specs.geronimo-jms_1.1_spec" version="0.0.0"/>
+   <plugin id="org.apache.activemq.activemq-client" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-beanutils" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-codec" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-compress" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-io" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-net" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.activemq.activemq-jaas" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.activemq.activemq-kahadb-store" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.activemq.activemq-openwire-legacy" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.activemq.protobuf.activemq-protobuf" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.poi.poi" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.poi.poi-ooxml" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.poi.poi-ooxml-lite" version="0.0.0"/>
+   <plugin id="xstream" version="0.0.0"/>
+   <plugin id="org.fusesource.hawtbuf.hawtbuf" version="0.0.0"/>
+   <plugin id="org.apache.commons.commons-text" version="0.0.0"/>
+   <plugin id="org.apache.logging.log4j.api" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.xmlbeans.xmlbeans" version="0.0.0"/>
+   <plugin id="org.apache.logging.log4j.to.slf4j" version="0.0.0"/>
+   <plugin id="com.github.ben-manes.caffeine" version="0.0.0"/>
+   <plugin id="com.google.gson" version="0.0.0"/>
+   <plugin id="com.google.guava" version="0.0.0"/>
+   <plugin id="com.google.guava.failureaccess" version="0.0.0"/>
+   <plugin id="com.google.http-client.google-http-client" version="0.0.0"/>
+   <plugin id="wrapped.io.opencensus.opencensus-api" version="0.0.0"/>
+   <plugin id="wrapped.io.opencensus.opencensus-contrib-http-util" version="0.0.0"/>
+   <plugin id="wrapped.io.grpc.grpc-context" version="0.0.0"/>
+   <plugin id="org.apache.httpcomponents.httpcore" version="0.0.0"/>
+   <plugin id="org.apache.httpcomponents.httpclient" version="0.0.0"/>
+   <plugin id="org.osgi.service.cm" version="0.0.0"/>
+   <plugin id="org.osgi.service.event" version="0.0.0"/>
+   <plugin id="com.google.zxing.core" version="0.0.0"/>
+   <plugin id="io.github.classgraph.classgraph" version="0.0.0"/>
+   <plugin id="wrapped.net.sourceforge.barbecue.barbecue" version="0.0.0"/>
+   <plugin id="org.antlr.antlr4-runtime" version="0.0.0"/>
+   <plugin id="org.codehaus.jettison.jettison" version="0.0.0"/>
+   <plugin id="wrapped.org.dom4j.dom4j" version="0.0.0"/>
+   <plugin id="javax.xml" version="0.0.0"/>
+   <plugin id="org.eclipse.osgi" version="0.0.0"/>
+   <plugin id="com.diffplug.osgi.extension.sun.misc" version="0.0.0"/>
+   <plugin id="org.objectweb.asm" version="0.0.0"/>
+   <plugin id="org.tukaani.xz" version="0.0.0"/>
+   <plugin id="org.apache.felix.scr" version="0.0.0"/>
+   <plugin id="org.osgi.service.component" version="0.0.0"/>
+   <plugin id="org.osgi.service.metatype" version="0.0.0"/>
+   <plugin id="org.osgi.util.promise" version="0.0.0"/>
+   <plugin id="org.osgi.util.function" version="0.0.0"/>
+   <plugin id="org.eclipse.core.runtime" version="0.0.0"/>
+   <plugin id="org.eclipse.equinox.app" version="0.0.0"/>
+   <plugin id="org.eclipse.equinox.common" version="0.0.0"/>
+   <plugin id="org.eclipse.equinox.registry" version="0.0.0"/>
+   <plugin id="org.eclipse.osgi.compatibility.state" version="0.0.0"/>
+   <plugin id="org.krysalis.barcode4j" version="0.0.0"/>
+   <plugin id="org.osgi.service.component.annotations" version="0.0.0"/>
+   <plugin id="wrapped.com.google.http-client.google-http-client-gson" version="0.0.0"/>
+   <plugin id="wrapped.com.google.zxing.javase" version="0.0.0"/>
+   <plugin id="wrapped.dev.samstevens.totp.totp" version="0.0.0"/>
+   <plugin id="wrapped.org.jfree.jcommon" version="0.0.0"/>
+   <plugin id="wrapped.org.jfree.jfreechart" version="0.0.0"/>
+   <plugin id="org.eclipse.core.contenttype" version="0.0.0"/>
+   <plugin id="org.eclipse.core.jobs" version="0.0.0"/>
+   <plugin id="wrapped.com.zaxxer.SparseBitSet" version="0.0.0"/>
+   <plugin id="org.apache.servicemix.bundles.batik" version="0.0.0"/>
+   <plugin id="wrapped.org.apache.xmlgraphics.xmlgraphics-commons" version="0.0.0"/>
+   <plugin id="org.w3c.css.sac" version="0.0.0"/>
+   <plugin id="org.w3c.dom.smil" version="0.0.0"/>
+   <plugin id="org.w3c.dom.svg" version="0.0.0"/>
+   <plugin id="org.w3c.dom.events" version="0.0.0"/>
+   <plugin id="org.apache.pdfbox" version="0.0.0"/>
+   <plugin id="org.apache.pdfbox.fontbox" version="0.0.0"/>
+   <plugin id="org.apache.commons.math3" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.util" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.servlet-api" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.servlet-api.capability" version="0.0.0"/>
+   <plugin id="slf4j.api" version="0.0.0"/>
+   <plugin id="slf4j.jdk14" version="0.0.0"/>
+
+   <!-- From org.adempiere.server-feature -->
+   <plugin id="javax.websocket-api" version="0.0.0"/>
+   <plugin id="org.adempiere.server" version="0.0.0"/>
+   <plugin id="org.idempiere.ui.sso.oidc" version="0.0.0"/>
+   <plugin id="org.adempiere.eclipse.equinox.http.servlet" version="0.0.0"/>
+   <plugin id="org.objectweb.asm.commons" version="0.0.0"/>
+   <plugin id="org.objectweb.asm.tree" version="0.0.0"/>
+   <plugin id="org.mortbay.jasper.apache-jsp" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.client" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.deploy" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.io" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.jmx" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.jndi" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.plus" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.security" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.util.ajax" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.xml" version="0.0.0"/>
+   <plugin id="jakarta.persistence-api" version="0.0.0"/>
+   <plugin id="org.objectweb.asm.util" version="0.0.0"/>
+   <plugin id="org.objectweb.asm.tree.analysis" version="0.0.0"/>
+   <plugin id="com.google.oauth-client" version="0.0.0"/>
+   <plugin id="org.glassfish.hk2.external.aopalliance-repackaged" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.websocket.core.client" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.alpn.client" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.rewrite" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.websocket.core.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.websocket.core.server" version="0.0.0"/>
+   <plugin id="jakarta.transaction-api" version="0.0.0"/>
+   <plugin id="org.idempiere.jetty.osgi.boot.fragment" version="0.0.0"/>
+   <plugin id="jakarta.validation.jakarta.validation-api" version="0.0.0"/>
+   <plugin id="javax.servlet.jsp.jstl-api" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.glassfish.jstl" version="0.0.0"/>
+   <plugin id="org.glassfish.web.javax.servlet.jsp.jstl" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.annotations" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.apache-jsp" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.security.jaspi" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.osgi.boot" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.osgi.boot.jsp" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.osgi" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.servlet" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.servlets" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.webapp" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.api" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.javax.client" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.javax.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.javax.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.websocket.servlet" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.jndi" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.plus" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.proxy" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http.spi" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.ee8.security" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http2.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http2.hpack" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http2.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http3.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http3.qpack" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.http3.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.keystore" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.proxy" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.quic.common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.quic.quic-quiche-common" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.quic.quic-quiche-jna" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.quic.server" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.session" version="0.0.0"/>
+   <plugin id="org.eclipse.jetty.websocket-api" version="0.0.0"/>
+   <plugin id="javax.interceptor-api" version="0.0.0"/>
+   <plugin id="javax.enterprise.cdi-api" version="0.0.0"/>
+   <plugin id="com.sun.jna" version="0.0.0"/>
+   <plugin id="javax.security.auth.message-api" version="0.0.0"/>
+
+</feature>
