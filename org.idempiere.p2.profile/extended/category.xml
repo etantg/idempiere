@@ -65,19 +65,19 @@
       <category name="idempiere.server"/>
    </feature>
 
-   <!-- Extended: Web Services -->
+   <!-- Web Services -->
    <feature url="features/org.idempiere.webservices.feature_14.0.0.qualifier.jar"
             id="org.idempiere.webservices.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>
    </feature>
 
-   <!-- Extended: Payment Processor -->
+   <!-- Payment Processor -->
    <feature url="features/org.adempiere.payment.processor.feature_14.0.0.qualifier.jar"
             id="org.adempiere.payment.processor.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>
    </feature>
 
-   <!-- Extended: Replication -->
+   <!-- Replication -->
    <feature url="features/org.adempiere.replication.feature_14.0.0.qualifier.jar"
             id="org.adempiere.replication.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>

@@ -45,7 +45,6 @@
   <plugin id="org.idempiere.printformat.editor"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
-
   <!-- Application Server -->
   <plugin id="org.adempiere.server"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
@@ -64,6 +63,10 @@
   <plugin id="org.compiere.db.postgresql.provider"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
   <plugin id="org.compiere.db.oracle.provider"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+		  
+  <!-- Accounting -->
+  <plugin id="org.idempiere.acct"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
   <!-- Infrastructure -->

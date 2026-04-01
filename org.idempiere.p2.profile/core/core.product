@@ -31,17 +31,8 @@
    </plugins>
 
    <features>
-      <feature id="org.idempiere.core.feature"/>
-	  <feature id="org.adempiere.ui.zk.feature"/>
-      <feature id="org.idempiere.zk.feature"/>
-      <feature id="org.adempiere.report.jasper.feature"/>
-      <feature id="org.compiere.db.provider.feature"/>
-      <feature id="org.idempiere.hazelcast.service.feature"/>
-      <feature id="org.idempiere.felix.webconsole.feature"/>
-      <feature id="org.adempiere.pipo.feature"/>
 	  <feature id="org.idempiere.core.runtime.feature"/>
       <feature id="org.idempiere.eclipse.platform.feature"/>
-      <feature id="org.idempiere.equinox.p2.director.feature"/>
    </features>
 
 <configurations>
