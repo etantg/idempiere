@@ -30,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledFuture;
@@ -148,7 +149,10 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			
 			try {
 				Thread.sleep(100);
-			} catch (InterruptedException e) {}
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				fail("Interrupted while waiting for background job initialization", e);
+			}
 			
 			assertTrue(pi.getAD_PInstance_ID() > 0, "Failed to create background process instance");
 			assertFalse(pi.isError(), "Error creating background job: " + pi.getSummary());
@@ -156,10 +160,13 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			assertEquals(pi.getAD_PInstance_ID(), pinstance.get_ID(), "Failed to retrive background process instance");
 			try {
 				pi = future.get(10000, TimeUnit.MILLISECONDS);
-			} catch (ExecutionException | TimeoutException | InterruptedException e) {
-				e.printStackTrace();
-				fail("Error waiting for background job to complete: " + e.getMessage());
+			} catch (ExecutionException | TimeoutException e) {
+				fail("Error waiting for background job to complete: " + e.getMessage(), e);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				fail("Interrupted while waiting for background job to complete", e);
 			}
+			
 			assertFalse(pi.isError(), "Error running background job: " + pi.getSummary());
 			pinstance.load((String)null);
 			assertFalse(pinstance.isProcessing(), "Timeout waiting for background job to complete");
@@ -168,6 +175,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			note = query.setParameters(MPInstance.Table_ID, pinstance.getAD_PInstance_ID()).first();
 			assertNotNull(note, "Failed to retrieve notice");
 			MAttachment attachment = note.getAttachment();
+			assertNotNull(attachment, "Failed to retrieve notice attachment");
 			assertEquals(1, attachment.getEntryCount(), "Unexpected number of notice attachment");
 			MAttachmentEntry entry = attachment.getEntry(0);
 			assertNotNull(entry, "Failed to retrieve attachment entry");
@@ -182,8 +190,8 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			if (note != null) {
 				AD_Note_ID = note.get_ID();
 				MAttachment attachment = note.getAttachment();
-				AD_Attachment_ID = attachment.get_ID();
 				if (attachment != null) {
+					AD_Attachment_ID = attachment.get_ID();
 					attachment.deleteEx(true);
 				}
 				note.deleteEx(true);
@@ -198,14 +206,18 @@ public class AuditTraceContextTest extends AbstractTestCase {
 		
 		Query query = new Query(Env.getCtx(), MChangeLog.Table_Name, 
 				MChangeLog.COLUMNNAME_AD_Table_ID + "=? AND " + MChangeLog.COLUMNNAME_Record_ID + "=?", null);
-		MChangeLog changeLog = query.setParameters(MNote.Table_ID, AD_Note_ID).first();
-		assertNotNull(changeLog, "No change log found for deleted record");
-		assertTrue(changeLog.get_ID() > 0, "Change log ID is invalid");
-		assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+		if (AD_Note_ID > 0) {
+			List<MChangeLog> changeLogs = query.setParameters(MNote.Table_ID, AD_Note_ID).list();
+			assertFalse(changeLogs.isEmpty(), "No change log found");
+			for (MChangeLog changeLog : changeLogs)
+				assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+		}
 		
-		changeLog = query.setParameters(MAttachment.Table_ID, AD_Attachment_ID).first();
-		assertNotNull(changeLog, "No change log found for deleted record");
-		assertTrue(changeLog.get_ID() > 0, "Change log ID is invalid");
-		assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+		if (AD_Attachment_ID > 0) {
+			List<MChangeLog> changeLogs = query.setParameters(MAttachment.Table_ID, AD_Attachment_ID).list();
+			assertFalse(changeLogs.isEmpty(), "No change log found");
+			for (MChangeLog changeLog : changeLogs)
+				assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+		}
 	}
 }
