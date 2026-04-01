@@ -43,6 +43,7 @@ import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.compiere.util.Util;
+import org.idempiere.tracking.AuditTraceContext;
 
 /**
  * Callable to run process as background job.<br/>
@@ -107,6 +108,7 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 		processInfo.setPrintPreview(true);
 		
 		MPInstance instance = new MPInstance(m_ctx, processInfo.getAD_PInstance_ID(), null);
+		instance.restoreTraceContext();
 		String notificationType = instance.getNotificationType();
 		if (notificationType == null)
 			notificationType = MPInstance.NOTIFICATIONTYPE_Notice;
@@ -200,6 +202,7 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 			instance.saveEx();
 			
 			MPInstance.publishChangedEvent(AD_User_ID);
+			AuditTraceContext.clear();
 		}
 		return processInfo;
 	}

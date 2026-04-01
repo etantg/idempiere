@@ -40,6 +40,7 @@ import org.compiere.util.Msg;
 import org.compiere.util.Util;
 import org.idempiere.distributed.IMessageService;
 import org.idempiere.distributed.ITopic;
+import org.idempiere.tracking.AuditTraceContext;
 import org.osgi.service.event.Event;
 
 /**
@@ -710,6 +711,10 @@ public class MPInstance extends X_AD_PInstance
 			int sessionId = Env.getContextAsInt(Env.getCtx(), Env.AD_SESSION_ID);
 			if (sessionId > 0)
 				setAD_Session_ID(sessionId);
+			
+			String externalTraceId = AuditTraceContext.getExternalTraceId();
+	        if (externalTraceId != null)
+	            setExternalTraceId(externalTraceId);
 		}
 		
 		return true;
@@ -729,4 +734,13 @@ public class MPInstance extends X_AD_PInstance
 			saveEx();
 		}
 	}
+	
+	/**
+	 * Bind the ExternalTraceId of this process instance into AuditTraceContext for the worker thread.
+	 */
+	public void restoreTraceContext() {
+        String externalTraceId = getExternalTraceId();
+        if (externalTraceId != null)
+            AuditTraceContext.setExternalTraceId(externalTraceId);
+    }
 }	//	MPInstance
