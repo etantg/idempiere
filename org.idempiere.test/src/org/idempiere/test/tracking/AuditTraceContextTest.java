@@ -85,7 +85,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			MChangeLog changeLog = query.setParameters(MTest.Table_ID, t1.get_ID()).first();
 			assertNotNull(changeLog, "No change log found for inserted record");
 			assertTrue(changeLog.get_ID() > 0, "Change log ID is invalid");
-			assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");		
+			assertEquals(externalTraceId, changeLog.getExternalTraceId(), "Unexpected ExternalTraceId");
 		} finally {
 			AuditTraceContext.clear();
 		}
@@ -107,7 +107,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 	        boolean ok = process.processIt(pi, trx);
 	        assertTrue(ok, "Report process must return true");
 	        pinstance.load(getTrxName());
-	        assertEquals(pinstance.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+	        assertEquals(externalTraceId, pinstance.getExternalTraceId(), "Unexpected ExternalTraceId");
 		} finally {
 			AuditTraceContext.clear();
 		}
@@ -176,7 +176,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			assertTrue(entry.getName() != null && entry.getName().toUpperCase().contains(".PDF"), "No PDF report attach to notice");
 						
 			pinstance.load((String) null);
-	        assertEquals(pinstance.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+			assertEquals(externalTraceId, pinstance.getExternalTraceId(), "Unexpected ExternalTraceId");
 		} finally {
 			rollback();
 
@@ -204,14 +204,14 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			List<MChangeLog> changeLogs = query.setParameters(MNote.Table_ID, AD_Note_ID).list();
 			assertFalse(changeLogs.isEmpty(), "No change log found");
 			for (MChangeLog changeLog : changeLogs)
-				assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+				assertEquals(externalTraceId, changeLog.getExternalTraceId(), "Unexpected ExternalTraceId");
 		}
 		
 		if (AD_Attachment_ID > 0) {
 			List<MChangeLog> changeLogs = query.setParameters(MAttachment.Table_ID, AD_Attachment_ID).list();
 			assertFalse(changeLogs.isEmpty(), "No change log found");
 			for (MChangeLog changeLog : changeLogs)
-				assertEquals(changeLog.getExternalTraceId(), externalTraceId, "Unexpected ExternalTraceId");
+				assertEquals(externalTraceId, changeLog.getExternalTraceId(), "Unexpected ExternalTraceId");
 		}
 	}
 }
