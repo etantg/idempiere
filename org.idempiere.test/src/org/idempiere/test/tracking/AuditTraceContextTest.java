@@ -148,28 +148,22 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			assertNotNull(future, "Failed to schedule background job");
 			
 			try {
-				Thread.sleep(100);
+				pi = future.get(10, TimeUnit.SECONDS);
+			} catch (ExecutionException | TimeoutException e) {
+			    fail("Error waiting for background job to complete: " + e.getMessage(), e);
 			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				fail("Interrupted while waiting for background job initialization", e);
+			    Thread.currentThread().interrupt();
+			    fail("Interrupted while waiting for background job to complete", e);
 			}
 			
 			assertTrue(pi.getAD_PInstance_ID() > 0, "Failed to create background process instance");
-			assertFalse(pi.isError(), "Error creating background job: " + pi.getSummary());
-			pinstance = new MPInstance(Env.getCtx(), pi.getAD_PInstance_ID(), null);
-			assertEquals(pi.getAD_PInstance_ID(), pinstance.get_ID(), "Failed to retrive background process instance");
-			try {
-				pi = future.get(10000, TimeUnit.MILLISECONDS);
-			} catch (ExecutionException | TimeoutException e) {
-				fail("Error waiting for background job to complete: " + e.getMessage(), e);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-				fail("Interrupted while waiting for background job to complete", e);
-			}
-			
-			assertFalse(pi.isError(), "Error running background job: " + pi.getSummary());
-			pinstance.load((String)null);
-			assertFalse(pinstance.isProcessing(), "Timeout waiting for background job to complete");
+	        assertFalse(pi.isError(), "Error running background job: " + pi.getSummary());
+
+	        pinstance = new MPInstance(Env.getCtx(), pi.getAD_PInstance_ID(), null);
+	        assertEquals(pi.getAD_PInstance_ID(), pinstance.get_ID(), "Failed to retrieve background process instance");
+
+	        pinstance.load((String) null);
+	        assertFalse(pinstance.isProcessing(), "Background job still processing after completion");
 			
 			Query query = new Query(Env.getCtx(), MNote.Table_Name, "AD_Table_ID=? AND Record_ID=?", null);
 			note = query.setParameters(MPInstance.Table_ID, pinstance.getAD_PInstance_ID()).first();
