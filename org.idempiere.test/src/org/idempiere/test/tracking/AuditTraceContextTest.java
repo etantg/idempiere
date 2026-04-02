@@ -126,7 +126,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 		int AD_Note_ID = 0;
 		int AD_Attachment_ID = 0;
 		try {
-			process = MProcess.get(236);
+			process = MProcess.get(236); // Storage Detail
 			pi = new ProcessInfo(process.getName(), process.getAD_Process_ID());
 			pi.setReportType("PDF");
 			pi.setAD_Client_ID(getAD_Client_ID());
