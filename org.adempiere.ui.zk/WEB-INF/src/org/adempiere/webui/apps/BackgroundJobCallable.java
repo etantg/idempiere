@@ -53,6 +53,7 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 {
 	private final ProcessInfo processInfo;	
 	private Properties m_ctx;
+	private String m_externalTraceId;
 	private IProcessUI processUI;
 	
 	private static final CLogger log = CLogger.getCLogger(BackgroundJobCallable.class);
@@ -86,15 +87,19 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 		Env.setContext(m_ctx, Env.AD_USER_ID, ctx.getProperty(Env.AD_USER_ID));
 		Env.setContext(m_ctx, Env.DATE, ctx.getProperty(Env.DATE));
 		Env.setContext(m_ctx, Env.AD_SESSION_ID, ctx.getProperty(Env.AD_SESSION_ID));
+		
+		m_externalTraceId = AuditTraceContext.getExternalTraceId();
 	}
 	
 	@Override
 	public ProcessInfo call() {
 		try {
 			ServerContext.setCurrentInstance(m_ctx);
+			AuditTraceContext.setExternalTraceId(m_externalTraceId);
 			return doRun();
 		} finally {
 			ServerContext.dispose();
+			AuditTraceContext.clear();
 		}
 	}
 	
@@ -108,7 +113,6 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 		processInfo.setPrintPreview(true);
 		
 		MPInstance instance = new MPInstance(m_ctx, processInfo.getAD_PInstance_ID(), null);
-		instance.restoreTraceContext();
 		String notificationType = instance.getNotificationType();
 		if (notificationType == null)
 			notificationType = MPInstance.NOTIFICATIONTYPE_Notice;
@@ -202,7 +206,6 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 			instance.saveEx();
 			
 			MPInstance.publishChangedEvent(AD_User_ID);
-			AuditTraceContext.clear();
 		}
 		return processInfo;
 	}

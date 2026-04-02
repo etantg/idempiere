@@ -134,10 +134,6 @@ public class ServerProcessCtl implements Runnable {
 		{
 			instance = new MPInstance(Env.getCtx(), pi.getAD_PInstance_ID(), null);
 		}
-		
-		// Restore ExternalTraceId from AD_PInstance into AuditTraceContext so all AD_ChangeLog rows written 
-		// during this job carry the same ExternalTraceId as the originating request. No-op when null.
-		instance.restoreTraceContext();
 
 		//	execute
 		ServerProcessCtl worker = new ServerProcessCtl(pi, trx);

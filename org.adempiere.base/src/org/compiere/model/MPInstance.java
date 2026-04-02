@@ -734,13 +734,4 @@ public class MPInstance extends X_AD_PInstance
 			saveEx();
 		}
 	}
-	
-	/**
-	 * Bind the ExternalTraceId of this process instance into AuditTraceContext for the worker thread.
-	 */
-	public void restoreTraceContext() {
-        String externalTraceId = getExternalTraceId();
-        if (externalTraceId != null)
-            AuditTraceContext.setExternalTraceId(externalTraceId);
-    }
 }	//	MPInstance
