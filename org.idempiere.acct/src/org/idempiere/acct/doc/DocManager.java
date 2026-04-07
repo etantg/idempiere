@@ -854,7 +854,13 @@ public class DocManager {
 					if (AD_Table_ID == MMatchPO.Table_ID)
 						mpo = new MMatchPO(Env.getCtx(), Record_ID, trxName);
 					MMatchInv[] miList = MMatchInv.getInvoiceByDateAcct(Env.getCtx(), recordID, cd.getDateAcct(), trxName);
-					boolean isBeforeBackDateMatchInv = true;
+					int backDateMatchInvInvoiceId = 0;
+					if (AD_Table_ID == MMatchInv.Table_ID) {
+						MMatchInv backDateMatchInv = new MMatchInv(Env.getCtx(), Record_ID, trxName);
+						MInvoiceLine backDateInvoiceLine = new MInvoiceLine(Env.getCtx(), backDateMatchInv.getC_InvoiceLine_ID(), trxName);
+						backDateMatchInvInvoiceId = backDateInvoiceLine.getC_Invoice_ID();
+					}
+					boolean isBeforeBackDateMatchInv = recordID == backDateMatchInvInvoiceId;
 					for (MMatchInv mi : miList) {
 						if (AD_Table_ID == MMatchInv.Table_ID) {
 							if (mi.get_ID() != Record_ID && mi.getReversal_ID() != Record_ID) {
