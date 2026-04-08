@@ -1,68 +1,108 @@
+:root {
+	--zk-checkbox-checked-bg: var(--zk-color-primary);
+	--zk-checkbox-focus-border: var(--zk-color-focus-border);
+	--zk-checkbox-focus-ink: var(--zk-color-focus-ink);
+	--zk-input-control-border-reset: var(--zk-border-none);
+	--zk-input-border-width: var(--zk-size-1);
+	--zk-input-border-color: var(--zk-color-border-subtle);
+	--zk-input-border: var(--zk-input-border-width) solid var(--zk-input-border-color);
+	--zk-input-disabled-text: var(--zk-text-color-disabled-strong);
+	--zk-input-disabled-strong-text: var(--zk-text-color-strong);
+	--zk-input-disabled-bg: var(--zk-color-disabled-bg);
+	--zk-input-disabled-alt-bg: var(--zk-color-disabled-alt);
+	--zk-input-focus-bg: var(--zk-color-focus-bg);
+	--zk-input-text-color: var(--zk-text-color-default);
+	--zk-input-control-hover-bg: var(--zk-color-primary);
+	--zk-input-control-hover-icon-color: var(--zk-color-surface);
+	--zk-input-attachment-border: var(--zk-size-1) solid var(--zk-color-border-muted);
+	--zk-input-attachment-border-radius: var(--zk-radius-md);
+	--zk-input-attachment-bg: var(--zk-color-muted-bg);
+	--zk-input-attachment-margin-inline-end: var(--zk-space-lg);
+	--zk-input-attachment-margin-block-end: var(--zk-space-lg);
+	--zk-input-attachment-padding-inline-start: var(--zk-space-lg);
+	--zk-input-attachment-padding-inline-end: var(--zk-space-lg);
+	--zk-input-comboitem-min-height: var(--zk-size-14);
+	--zk-input-popup-max-height: var(--zk-dimension-panel-md);
+	--zk-input-control-border-radius: var(--zk-radius-md);
+	--zk-input-control-height: var(--zk-size-24);
+	--zk-input-control-min-height: var(--zk-size-24);
+	--zk-input-control-width: var(--zk-size-24);
+	--zk-input-control-min-width: var(--zk-size-24);
+	--zk-input-control-padding: var(--zk-space-0);
+	--zk-input-control-icon-line-height: var(--zk-size-24);
+	--zk-input-control-icon-size: var(--zk-size-14);
+	--zk-input-timebox-icon-line-height: var(--zk-line-height-xs);
+	--zk-input-field-padding-inline-end: var(--zk-size-5);
+	--zk-input-checkbox-checked-bg: var(--zk-checkbox-checked-bg);
+	--zk-input-checkbox-focus-border: var(--zk-checkbox-focus-border);
+	--zk-input-checkbox-focus-ink: var(--zk-checkbox-focus-ink);
+}
+
 <%-- Attachment Item --%>
 .z-attachment-item {
-	border: 1px solid #dcdcdc;
-	border-radius: 4px;
-	background-color: #f5f5f5;
+	border: var(--zk-input-attachment-border);
+	border-radius: var(--zk-input-attachment-border-radius);
+	background-color: var(--zk-input-attachment-bg);
 	width: auto !important;
 	display: inline-block;
-	margin-right: 5px; 
-	margin-bottom: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
+	margin-right: var(--zk-input-attachment-margin-inline-end); 
+	margin-bottom: var(--zk-input-attachment-margin-block-end);
+	padding-left: var(--zk-input-attachment-padding-inline-start);
+	padding-right: var(--zk-input-attachment-padding-inline-end);
 }
 
 .z-attachment-item-del-button {
 	float: right;
-	background-color: #f5f5f5;
+	background-color: var(--zk-input-attachment-bg);
 }
 
 <%-- Combobox --%>
 .z-combobox-disabled, .z-combobox[disabled] {
-	color: rgba(0,0,0,0.7) !important; 
+	color: var(--zk-input-disabled-text) !important; 
 	cursor: default !important; 
 }
 
 .z-combobox-disabled > input {
-	color: rgba(0,0,0,0.7) !important; 
+	color: var(--zk-input-disabled-text) !important; 
 	cursor: default !important;
 }
 
 .z-combobox-text-disabled {
-	background-color: #ECEAE4 !important;
+	background-color: var(--zk-input-disabled-alt-bg) !important;
 }
 .z-comboitem {
-	min-height:14px;
+	min-height:var(--zk-input-comboitem-min-height);
 }
 <%-- highlight focus form element --%>
 input:focus, textarea:focus, .z-combobox-input:focus, z-datebox-input:focus, select:focus {
-	background: #FFFFCC;
+	background: var(--zk-input-focus-bg);
 }
 
 .z-textbox-readonly, .z-intbox-readonly, .z-longbox-readonly, .z-doublebox-readonly, 
 .z-decimalbox-readonly, .z-datebox-readonly, .z-timebox-readonly, .editor-input-disd, 
 .z-textbox[readonly], .z-intbox[readonly], .z-longbox[readonly], .z-doublebox[readonly], 
 .z-decimalbox[readonly], .z-datebox[readonly], .z-timebox[readonly] {
-	background-color: #F0F0F0;
+	background-color: var(--zk-input-disabled-bg);
 }
 
 .z-textbox[disabled], .z-intbox[disabled], .z-longbox[disabled], .z-doublebox[disabled], 
 .z-decimalbox[disabled], .z-datebox[disabled], .z-timebox[disabled] {
-	color: black !important;
-	background-color: #F0F0F0 !important;
+	color: var(--zk-input-disabled-strong-text) !important;
+	background-color: var(--zk-input-disabled-bg) !important;
 	cursor: default !important;
 	opacity: 1 !important;
-	border: 1px solid #ECECEC;
+	border: var(--zk-input-border);
 }
 
 .z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox,
 .z-datebox-input, .z-datebox-button, .z-timebox-input, .z-timebox-button,
 .z-combobox-input, .z-combobox-button {
-	border: 1px solid #ECECEC;
+	border: var(--zk-input-border);
 }
 
 <%-- workaround for http://jira.idempiere.com/browse/IDEMPIERE-692 --%>
 .z-combobox-popup {
-	max-height: 200px;
+	max-height: var(--zk-input-popup-max-height);
 }
 
 <%-- datebox --%>
@@ -71,52 +111,52 @@ input:focus, textarea:focus, .z-combobox-input:focus, z-datebox-input:focus, sel
   	align-items: center;
 }
 .z-datebox-input {
-	padding-right: 5px;
+	padding-right: var(--zk-input-field-padding-inline-end);
 	flex: auto;
 }
 .z-datebox-input:focus + .z-datebox-button {
-  	border: none;
+	border: var(--zk-input-control-border-reset);
 }
 .z-datebox-button {
-	border: none;
-  	border-radius: 4px;
+	border: var(--zk-input-control-border-reset);
+	border-radius: var(--zk-input-control-border-radius);
   	position: relative;
-  	width: 24px;
-  	min-width: 24px;
-  	height: 24px;
-  	min-height: 24px;  	
+	width: var(--zk-input-control-width);
+	min-width: var(--zk-input-control-min-width);
+	height: var(--zk-input-control-height);
+	min-height: var(--zk-input-control-min-height);  	
   	flex: auto;
-  	color: #333;
-  	padding: 0px;
+	color: var(--zk-input-text-color);
+	padding: var(--zk-input-control-padding);
 }
 .z-datebox-button:hover {
-  	background-color: #7ac8ff !important;
+	background-color: var(--zk-input-control-hover-bg) !important;
 }
 .z-datebox-button > i {
-	line-height: 24px;
-	font-size: 14px;
+	line-height: var(--zk-input-control-icon-line-height);
+	font-size: var(--zk-input-control-icon-size);
 }
 .z-datebox-button:hover > i {
-  	color: #fff;
+	color: var(--zk-input-control-hover-icon-color);
 }
 
 .z-timebox {
   display: inline-flex;
 }
 .z-timebox-button>a>i {
-	line-height: 12px;
+	line-height: var(--zk-input-timebox-icon-line-height);
 	transform:translateY(-1px);
 }
 
 input[type="checkbox"]:checked {
-    background-color: #7ac8ff;
+	background-color: var(--zk-input-checkbox-checked-bg);
 }
 
 <%-- focus indicator for checkbox --%>
 input[type="checkbox"]:focus {
-    border-color: #006AF9;
-    color: #FFFF08;
+	border-color: var(--zk-input-checkbox-focus-border);
+	color: var(--zk-input-checkbox-focus-ink);
 }
 .z-label {
-	color: #333;
+	color: var(--zk-input-text-color);
 }

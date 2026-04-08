@@ -1,6 +1,29 @@
+:root {
+	--zk-parameter-color-surface: var(--zk-color-surface);
+	--zk-parameter-dimension-dialog-md: var(--zk-dimension-dialog-md);
+	--zk-parameter-dimension-panel-sm: var(--zk-dimension-panel-sm);
+	--zk-parameter-line-height-normal: var(--zk-line-height-normal);
+	--zk-parameter-overlay-color-light: var(--zk-overlay-color-light);
+	--zk-parameter-size-1: var(--zk-size-1);
+	--zk-parameter-size-180: var(--zk-size-180);
+	--zk-parameter-size-25pct: var(--zk-size-25pct);
+	--zk-parameter-size-2pct: var(--zk-size-2pct);
+	--zk-parameter-size-2vh: var(--zk-size-2vh);
+	--zk-parameter-size-300pt: var(--zk-size-300pt);
+	--zk-parameter-size-5pct: var(--zk-size-5pct);
+	--zk-parameter-size-70pct: var(--zk-size-70pct);
+	--zk-parameter-size-8pct: var(--zk-size-8pct);
+	--zk-parameter-size-90pct: var(--zk-size-90pct);
+	--zk-parameter-size-full: var(--zk-size-full);
+	--zk-parameter-space-0: var(--zk-space-0);
+	--zk-parameter-space-2xl: var(--zk-space-2xl);
+	--zk-parameter-space-md: var(--zk-space-md);
+	--zk-parameter-space-xs: var(--zk-space-xs);
+}
+
 <%-- process modal dialog --%>
 .process-modal-dialog {
-	width: 600px;
+	width: var(--zk-parameter-dimension-dialog-md);
 }
 .process-modal-dialog .main-parameter-layout{
 	height: auto;
@@ -11,12 +34,12 @@
 }
 @media screen and (max-width: 600px) {
 	.process-modal-dialog {
-		width: 100%;
+		width: var(--zk-parameter-size-full);
 	}
 }
 
 .main-parameter-layout {
-	height: 100%;
+	height: var(--zk-parameter-size-full);
 }
 .main-parameter-layout,
 .top-parameter-layout,
@@ -26,7 +49,7 @@
 .option-paramenter-layout,
 .report-option-container,
 .bottom-container{
-	width: 100%;
+	width: var(--zk-parameter-size-full);
 }
 .report-option-container {
 	display: flex;
@@ -36,27 +59,27 @@
 }
 
 .report-option-container div {
-    padding: 2px;
+    padding: var(--zk-parameter-space-xs);
 }
 
 /* Chromium based browsers + Safari */
 @supports (not (-moz-appearance: none)) {
 	.report-option-container {
-		height: 100% !important;
+		height: var(--zk-parameter-size-full) !important;
 	}
 }
 
 <%-- process/report parameters --%>
 .top-parameter-layout{
 	overflow: auto;
-	padding-bottom: 2vh;
+	padding-bottom: var(--zk-parameter-size-2vh);
 	flex-basis: auto;
 }
 
 <%-- run history and action buttons --%>
 .bottom-parameter-layout{
-	padding: 4px;
-	border-top: 1px solid rgba(0, 0, 0, 0.2);
+	padding: var(--zk-parameter-space-md);
+	border-top: var(--zk-parameter-size-1) solid var(--zk-parameter-overlay-color-light);
 	overflow: visible;
 }
 .bottom-container{
@@ -69,7 +92,7 @@
 .button-container{
 	float: right;
 	overflow: hidden;
-	padding: 4px;
+	padding: var(--zk-parameter-space-md);
 }
 @media screen and (max-width: 500px) {
 	.save-parameter-container .saved-parameter-label {
@@ -78,30 +101,30 @@
 }
 @media screen and (min-width: 501px) {
 	.save-parameter-container .saved-parameter-list > input::-webkit-input-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 @media screen and (min-width: 501px) {
 	.save-parameter-container .saved-parameter-list > input::-moz-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 @media screen and (min-width: 501px) {
 	.save-parameter-container .saved-parameter-list > input::-ms-input-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 
 <%-- process help text --%>
 .message-parameter{
-	max-height: 300pt; 
+	max-height: var(--zk-parameter-size-300pt); 
 	overflow: auto; 
-	margin: 10px;
-	line-height: normal;
+	margin: var(--zk-parameter-space-2xl);
+	line-height: var(--zk-parameter-line-height-normal);
 }
 
 .message-parameter p {
-	margin-bottom: 10px;
+	margin-bottom: var(--zk-parameter-space-2xl);
 }
 
 <%-- execution result panel --%>
@@ -111,26 +134,26 @@
 
 <%-- process parameters --%>
 .input-paramenter-layout{
-	width: 70%;
-	margin-left: 5%;
-	margin-right: 25%;
+	width: var(--zk-parameter-size-70pct);
+	margin-left: var(--zk-parameter-size-5pct);
+	margin-right: var(--zk-parameter-size-25pct);
 }
 @media screen and (max-width: 700px) {
 	.input-paramenter-layout{
-		width: 90% !important;
-		margin-left: 2% !important;
-		margin-right: 8% !important;
+		width: var(--zk-parameter-size-90pct) !important;
+		margin-left: var(--zk-parameter-size-2pct) !important;
+		margin-right: var(--zk-parameter-size-8pct) !important;
 	}
 }
 @media screen and (max-width: 500px) {
 	.input-paramenter-layout{
-		width: 100% !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
+		width: var(--zk-parameter-size-full) !important;
+		margin-left: var(--zk-parameter-space-0) !important;
+		margin-right: var(--zk-parameter-space-0) !important;
 	}
 }
 .popup-dialog .input-paramenter-layout{
-	width: 90%;
+	width: var(--zk-parameter-size-90pct);
 }
 @media screen and (max-width: 500px) {
 	.option-input-parameter.z-label.print-format-label,
@@ -140,26 +163,26 @@
 }
 @media screen and (min-width: 501px) {
 	.option-input-parameter.print-format-list > input::-webkit-input-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 @media screen and (min-width: 501px) {
 	.option-input-parameter.print-format-list > input::-moz-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 @media screen and (min-width: 501px) {
 	.option-input-parameter.print-format-list > input::-ms-input-placeholder {
-		color: white;
+		color: var(--zk-parameter-color-surface);
 	}
 }
 @media screen and (max-width: 400px) {
 	.option-input-parameter.print-format-list {
-		width: 180px !important;
+		width: var(--zk-parameter-size-180) !important;
 	}
 }
 @media screen and (max-width: 320px) {
 	.option-input-parameter.print-format-list {
-		width: 150px !important;
+		width: var(--zk-parameter-dimension-panel-sm) !important;
 	}
 }

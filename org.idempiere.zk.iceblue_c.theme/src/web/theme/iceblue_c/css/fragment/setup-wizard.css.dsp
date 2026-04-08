@@ -1,49 +1,62 @@
+:root {
+	--zk-setup-color-border: var(--zk-color-border);
+	--zk-setup-color-status-delayed: var(--zk-color-status-delayed);
+	--zk-setup-color-status-finished: var(--zk-color-status-finished);
+	--zk-setup-color-status-in-progress: var(--zk-color-status-in-progress);
+	--zk-setup-color-status-pending: var(--zk-color-status-pending);
+	--zk-setup-color-status-skipped: var(--zk-color-status-skipped);
+	--zk-setup-dimension-control-sm: var(--zk-dimension-control-sm);
+	--zk-setup-size-0: var(--zk-size-0);
+	--zk-setup-size-1: var(--zk-size-1);
+	--zk-setup-space-5xl: var(--zk-space-5xl);
+}
+
 .tree-wsetupwizard-finished {
-	background-color: #90EE90;
-	margin-left:20px
+	background-color: var(--zk-setup-color-status-finished);
+	margin-left:var(--zk-setup-space-5xl)
 }
 
 .tree-wsetupwizard-skipped {
-	background-color: #00FF00;
-	margin-left:20px
+	background-color: var(--zk-setup-color-status-skipped);
+	margin-left:var(--zk-setup-space-5xl)
 }
 
 .tree-wsetupwizard-delayed {
-	background-color: #0080FF;
-	margin-left:20px;
+	background-color: var(--zk-setup-color-status-delayed);
+	margin-left:var(--zk-setup-space-5xl);
 }
 
 .tree-wsetupwizard-in-progress {
-	background-color: #FFFF33;
-	margin-left:20px;
+	background-color: var(--zk-setup-color-status-in-progress);
+	margin-left:var(--zk-setup-space-5xl);
 }
 
 .tree-wsetupwizard-pending {
-	background-color: #FFFF00;
-	margin-left:20px;
+	background-color: var(--zk-setup-color-status-pending);
+	margin-left:var(--zk-setup-space-5xl);
 }
 
 .tree-setupwizard-nostatus{
-	margin-left:20px;
+	margin-left:var(--zk-setup-space-5xl);
 }
 
 .tree-wsetupwizard-finished-all {
-	background-color: #90EE90;
+	background-color: var(--zk-setup-color-status-finished);
 }
 
 .progressmeter-setupwizard {
-	background: #FFFF00 repeat-x 0 0 ;
+	background: var(--zk-setup-color-status-pending) repeat-x 0 0 ;
 	background-image: none;
-	border: 1px solid #CFCFCF;
+	border: var(--zk-setup-size-1) solid var(--zk-setup-color-border);
 	text-align: left;
-	height: 20px;
+	height: var(--zk-setup-dimension-control-sm);
 	overflow: hidden;
 }
 .progressmeter-setupwizard-image {
 	display: inline-block;
-	background: #90EE90;
+	background: var(--zk-setup-color-status-finished);
 	background-image: none;
-	height: 20px;
-	line-height: 0;
-	font-size: 0;
+	height: var(--zk-setup-dimension-control-sm);
+	line-height: var(--zk-setup-size-0);
+	font-size: var(--zk-setup-size-0);
 }

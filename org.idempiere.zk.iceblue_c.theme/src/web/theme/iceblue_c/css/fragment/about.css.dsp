@@ -1,9 +1,14 @@
+:root {
+	--zk-about-size-1-5em: var(--zk-size-1-5em);
+	--zk-about-size-1em: var(--zk-size-1em);
+}
+
 .about-trace-panel {
 }
 .about-info-panel {
     overflow: auto;
-    line-height: 1.5em;
-    font-size: 1em !important;
+    line-height: var(--zk-about-size-1-5em);
+    font-size: var(--zk-about-size-1em) !important;
 }
 .about-credit-panel {
 }
