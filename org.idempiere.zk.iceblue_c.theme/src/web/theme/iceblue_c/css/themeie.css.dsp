@@ -2,5 +2,5 @@
 <%@ taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" %>
 
 .login-box-body {
-	padding-bottom: var(--zk-size-20);
+	padding-bottom: 20px;
 }

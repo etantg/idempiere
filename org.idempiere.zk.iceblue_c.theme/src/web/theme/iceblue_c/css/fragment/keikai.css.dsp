@@ -1,21 +1,13 @@
-:root {
-	--zk-keikai-font-size-md: var(--zk-font-size-md);
-	--zk-keikai-size-38: var(--zk-size-38);
-	--zk-keikai-size-62: var(--zk-size-62);
-	--zk-keikai-space-3xl: var(--zk-space-3xl);
-	--zk-keikai-space-xs: var(--zk-space-xs);
-}
-
 .zstbtn.z-toolbarbutton {
-	padding: var(--zk-keikai-space-xs);
-	min-width: var(--zk-keikai-size-38);
+	padding: var(--zk-space-xs);
+	min-width: 38px;
 }
 .zschktbtn-gridlines.zschktbtn.z-toolbarbutton {
-	min-width: var(--zk-keikai-size-62);
+	min-width: 62px;
 }
 .zstbtn-real {
-    margin-right: var(--zk-keikai-space-3xl);
-    font-size: var(--zk-keikai-font-size-md);
+    margin-right: var(--zk-space-3xl);
+    font-size: var(--zk-font-size-md);
 }
 .zschktbtn .z-toolbarbutton-content {
 	justify-content: initial !important;

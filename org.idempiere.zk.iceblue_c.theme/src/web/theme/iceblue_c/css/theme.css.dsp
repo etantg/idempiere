@@ -2,17 +2,6 @@
 <%@ taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" %>
 <%@ taglib uri="http://www.idempiere.org/dsp/web/util" prefix="u" %>
 
-html,body {
-	margin: 0;
-	padding: 0;
-	height: var(--zk-size-full);
-	width: var(--zk-size-full);
-	background-color: var(--zk-color-page-bg);
-	color: var(--zk-text-color-default);
-	font-family: var(--zk-font-family-base);
-	overflow: hidden;
-}
-
 :root {
 	/* Font family */
 	--zk-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -42,7 +31,6 @@ html,body {
 	--zk-color-border-muted: #dcdcdc;
 	--zk-color-border-card: #dcdcdc;
 	--zk-color-border-accent: #9CBDFF;
-	--zk-color-border-button: #6d6d6d;
 	--zk-color-border-control: #ababab;
 	--zk-color-border-hover: #A8A8A8;
 	--zk-color-button-hover: #e4e4e4;
@@ -64,9 +52,7 @@ html,body {
 
 	/* Neutral palette */
 	--zk-color-neutral-200: #eee;
-	--zk-color-neutral-300: #c8c8c8;
 	--zk-color-neutral-350: #ddd;
-	--zk-color-neutral-375: #d8d8d8;
 	--zk-color-neutral-400: #bbb;
 	--zk-color-neutral-425: #e4e4e4;
 	--zk-color-neutral-450: #f1f1f1;
@@ -80,7 +66,6 @@ html,body {
 
 	/* Danger and status */
 	--zk-color-danger-soft: #fecaca;
-	--zk-color-danger-brand: #C62223;
 	--zk-color-danger-hover: #e74c3c;
 	--zk-color-danger-active: #dc2626;
 	--zk-color-status-finished: #90EE90;
@@ -92,11 +77,6 @@ html,body {
 	/* Interactive and utility */
 	--zk-color-drag-highlight: #3fb900;
 	--zk-color-tree-arrow: #696969;
-	--zk-color-keyword-red: red;
-	--zk-color-keyword-blue: blue;
-	--zk-color-keyword-yellow: yellow;
-	--zk-color-keyword-green: green;
-	--zk-color-keyword-lightgray: lightgray;
 	--zk-color-icon-muted: rgba(0, 0, 0, 0.57);
 	--zk-color-icon-disabled: rgba(0,0,0,0.34);
 
@@ -108,7 +88,6 @@ html,body {
 	--zk-shadow-inner-light: rgba(255, 255, 255, 0.35);
 	--zk-shadow-inner-dark: rgba(0, 0, 0, 0.18);
 	--zk-overlay-color-light: rgba(0, 0, 0, 0.2);
-	--zk-color-transparent: transparent;
 
 	/* Text colors */
 	--zk-text-color-default: #333;
@@ -130,112 +109,7 @@ html,body {
 	--zk-text-color-secondary-strong: #555;
 	--zk-text-color-shadow: #888;
 	--zk-text-color-button-hover: #111111;
-
-	/* Shared scale tokens for fragment spacing and sizing */
-	--zk-size-neg-2: -2px;
-	--zk-size-neg-4: -4px;
-	--zk-size-neg-6: -6px;
-	--zk-size-neg-7: -7px;
-	--zk-size-0: 0;
-	--zk-size-1: 1px;
-	--zk-size-2: 2px;
-	--zk-size-3: 3px;
-	--zk-size-4: 4px;
-	--zk-size-5: 5px;
-	--zk-size-6: 6px;
-	--zk-size-7: 7px;
-	--zk-size-8: 8px;
-	--zk-size-9: 9px;
-	--zk-size-10: 10px;
-	--zk-size-11: 11px;
-	--zk-size-12: 12px;
-	--zk-size-13: 13px;
-	--zk-size-14: 14px;
-	--zk-size-15: 15px;
-	--zk-size-16: 16px;
-	--zk-size-17: 17px;
-	--zk-size-18: 18px;
-	--zk-size-20: 20px;
-	--zk-size-22: 22px;
-	--zk-size-24: 24px;
-	--zk-size-25: 25px;
-	--zk-size-26: 26px;
-	--zk-size-28: 28px;
-	--zk-size-29: 29px;
-	--zk-size-30: 30px;
-	--zk-size-32: 32px;
-	--zk-size-36: 36px;
-	--zk-size-38: 38px;
-	--zk-size-40: 40px;
-	--zk-size-44: 44px;
-	--zk-size-45: 45px;
-	--zk-size-46: 46px;
-	--zk-size-48: 48px;
-	--zk-size-52: 52px;
-	--zk-size-56: 56px;
-	--zk-size-60: 60px;
-	--zk-size-62: 62px;
-	--zk-size-130: 130px;
-	--zk-size-150: 150px;
-	--zk-size-180: 180px;
-	--zk-size-190: 190px;
-	--zk-size-200: 200px;
-	--zk-size-220: 220px;
-	--zk-size-240: 240px;
-	--zk-size-250: 250px;
-	--zk-size-260: 260px;
-	--zk-size-280: 280px;
-	--zk-size-300: 300px;
-	--zk-size-320: 320px;
-	--zk-size-350: 350px;
-	--zk-size-380: 380px;
-	--zk-size-400: 400px;
-	--zk-size-410: 410px;
-	--zk-size-420: 420px;
-	--zk-size-450: 450px;
-	--zk-size-480: 480px;
-	--zk-size-500: 500px;
-	--zk-size-540: 540px;
-	--zk-size-550: 550px;
-	--zk-size-600: 600px;
-	--zk-size-604: 604px;
-	--zk-size-640: 640px;
-	--zk-size-700: 700px;
-	--zk-size-720: 720px;
-	--zk-size-750: 750px;
-	--zk-size-800: 800px;
-	--zk-size-900: 900px;
-	--zk-size-1000: 1000px;
-	--zk-size-1em: 1em;
-	--zk-size-1-3em: 1.3em;
-	--zk-size-1-5em: 1.5em;
-	--zk-size-2em: 2em;
-	--zk-size-2vh: 2vh;
-	--zk-size-8pct: 8%;
-	--zk-size-2pct: 2%;
-	--zk-size-5pct: 5%;
-	--zk-size-25pct: 25%;
-	--zk-size-35pct: 35%;
-	--zk-size-40pct: 40%;
-	--zk-size-50pct: 50%;
-	--zk-size-55pct: 55%;
-	--zk-size-60pct: 60%;
-	--zk-size-65pct: 65%;
-	--zk-size-70pct: 70%;
-	--zk-size-77pct: 77%;
-	--zk-size-80pct: 80%;
-	--zk-size-85pct: 85%;
-	--zk-size-88pct: 88%;
-	--zk-size-90pct: 90%;
-	--zk-size-95pct: 95%;
-	--zk-size-98pct: 98%;
-	--zk-size-99pct: 99%;
-	--zk-size-full: 100%;
-	--zk-size-150pct: 150%;
-	--zk-size-90vw: 90vw;
-	--zk-size-95vw: 95vw;
-	--zk-size-300pt: 300pt;
-
+	
 	/* Typography and font tokens */
 	--zk-font-family-icon: FontAwesome;
 	--zk-font-weight-thin: 100;
@@ -244,106 +118,105 @@ html,body {
 	--zk-font-weight-medium: 500;
 	--zk-font-weight-semibold: 600;
 	--zk-font-weight-bold: 700;
-	--zk-font-weight-900: 900;
-	--zk-font-style-normal: normal;
-	--zk-font-size-larger: larger;
-	--zk-font-size-smaller: smaller;
-	--zk-font-size-xx-small: xx-small;
-	--zk-font-size-xs: var(--zk-size-10);
-	--zk-font-size-sm: var(--zk-size-11);
-	--zk-font-size-md: var(--zk-size-12);
-	--zk-font-size-md-plus: var(--zk-size-13);
-	--zk-font-size-base: var(--zk-size-14);
-	--zk-font-size-lg: var(--zk-size-16);
-	--zk-font-size-xl: var(--zk-size-18);
-	--zk-font-size-2xl: var(--zk-size-20);
-	--zk-font-size-3xl: var(--zk-size-24);
-	--zk-font-size-4xl: var(--zk-size-32);
-	--zk-line-height-normal: normal;
-	--zk-line-height-xs: var(--zk-size-12);
-	--zk-line-height-sm: var(--zk-size-14);
-	--zk-line-height-md: var(--zk-size-16);
-	--zk-line-height-lg: var(--zk-size-24);
-	--zk-line-height-xl: var(--zk-size-30);
-	--zk-text-decoration-none: none;
-	--zk-text-decoration-underline: underline;
-	--zk-border-none: none;
+	--zk-font-weight-bolder: 900;
+	--zk-font-size-xs: 10px;
+	--zk-font-size-sm: 11px;
+	--zk-font-size-md: 12px;
+	--zk-font-size-md-plus: 13px;
+	--zk-font-size-base: 14px;
+	--zk-font-size-lg: 16px;
+	--zk-font-size-xl: 18px;
+	--zk-font-size-2xl: 20px;
+	--zk-font-size-3xl: 24px;
+	--zk-font-size-4xl: 32px;
+	--zk-line-height-xs: 12px;
+	--zk-line-height-sm: 14px;
+	--zk-line-height-md: 16px;
+	--zk-line-height-lg: 24px;
+	--zk-line-height-xl: 30px;
 
 	/* Spacing semantic tokens */
-	--zk-space-0: var(--zk-size-0);
-	--zk-space-2xs: var(--zk-size-1);
-	--zk-space-xs: var(--zk-size-2);
-	--zk-space-sm: var(--zk-size-3);
-	--zk-space-md: var(--zk-size-4);
-	--zk-space-lg: var(--zk-size-5);
-	--zk-space-lg-plus: var(--zk-size-6);
-	--zk-space-xl-minus: var(--zk-size-7);
-	--zk-space-xl: var(--zk-size-8);
-	--zk-space-xl-plus: var(--zk-size-9);
-	--zk-space-2xl: var(--zk-size-10);
-	--zk-space-3xl: var(--zk-size-12);
-	--zk-space-3xl-plus: var(--zk-size-13);
-	--zk-space-4xl-minus: var(--zk-size-14);
-	--zk-space-4xl: var(--zk-size-15);
-	--zk-space-4xl-plus: var(--zk-size-18);
-	--zk-space-5xl: var(--zk-size-20);
-	--zk-space-6xl: var(--zk-size-24);
-	--zk-space-7xl: var(--zk-size-30);
+	--zk-space-2xs: 1px;
+	--zk-space-xs: 2px;
+	--zk-space-sm: 3px;
+	--zk-space-md: 4px;
+	--zk-space-lg: 5px;
+	--zk-space-lg-plus: 6px;
+	--zk-space-xl-minus: 7px;
+	--zk-space-xl: 8px;
+	--zk-space-xl-plus: 9px;
+	--zk-space-2xl: 10px;
+	--zk-space-3xl: 12px;
+	--zk-space-3xl-plus: 13px;
+	--zk-space-4xl-minus: 14px;
+	--zk-space-4xl: 15px;
+	--zk-space-4xl-plus: 18px;
+	--zk-space-5xl: 20px;
+	--zk-space-6xl: 24px;
+	--zk-space-7xl: 30px;
 
 	/* Dimension semantic tokens */
-	--zk-dimension-icon-sm: var(--zk-size-12);
-	--zk-dimension-icon-md: var(--zk-size-16);
-	--zk-dimension-icon-lg: var(--zk-size-18);
-	--zk-dimension-control-sm: var(--zk-size-20);
-	--zk-dimension-control-md: var(--zk-size-24);
-	--zk-dimension-control-lg: var(--zk-size-30);
-	--zk-dimension-none: var(--zk-size-0);
-	--zk-dimension-hairline: var(--zk-size-1);
-	--zk-dimension-icon-xs: var(--zk-size-10);
-	--zk-dimension-panel-sm: var(--zk-size-150);
-	--zk-dimension-panel-md: var(--zk-size-200);
-	--zk-dimension-panel-lg: var(--zk-size-300);
-	--zk-dimension-dialog-sm: var(--zk-size-400);
-	--zk-dimension-dialog-md: var(--zk-size-600);
+	--zk-dimension-icon-sm: 12px;
+	--zk-dimension-icon-md: 16px;
+	--zk-dimension-icon-lg: 18px;
+	--zk-dimension-control-sm: 20px;
+	--zk-dimension-control-md: 24px;
+	--zk-dimension-control-lg: 30px;
+	--zk-dimension-hairline: 1px;
+	--zk-dimension-icon-xs: 10px;
+	--zk-dimension-panel-sm: 150px;
+	--zk-dimension-panel-md: 200px;
+	--zk-dimension-panel-lg: 300px;
+	--zk-dimension-dialog-sm: 400px;
+	--zk-dimension-dialog-md: 600px;
 
 	/* Radius semantic tokens */
-	--zk-radius-none: var(--zk-size-0);
-	--zk-radius-sm: var(--zk-size-2);
-	--zk-radius-md: var(--zk-size-4);
-	--zk-radius-lg: var(--zk-size-5);
-	--zk-radius-xl: var(--zk-size-10);
+	--zk-radius-sm: 2px;
+	--zk-radius-md: 4px;
+	--zk-radius-lg: 5px;
+	--zk-radius-xl: 10px;
+}
 
+html,body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	background-color: var(--zk-color-page-bg);
+	color: var(--zk-text-color-default);
+	font-family: var(--zk-font-family-base);
+	overflow: hidden;
 }
 
 .z-html p{
-	margin:var(--zk-size-0);
+	margin:0px;
 }
 
 .z-initing {
-	background-image: url(${c:encodeURL('~./theme/iceblue_c/images/zssosepowered.png')}) !important;
+    background-image: url(${c:encodeURL('~./theme/iceblue_c/images/zssosepowered.png')}) !important;
 }
 
 [class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-	font-family: var(--zk-font-family-base);
+    font-family: var(--zk-font-family-base);
 }
 @media screen and (min-device-width: 2500px) {
 	[class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-		font-size: var(--zk-size-14);
+		font-size: 14px;
 	}
 }
 @media screen and (max-device-width: 2499px) {
 	[class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-		font-size: var(--zk-size-13);
+		font-size: 13px;
 	}
 }
 @media screen and (max-device-width: 1899px) {
 	[class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-		font-size: var(--zk-size-12);
+		font-size: 12px;
 	}
 }
 @media screen and (max-device-width: 1399px) {
 	[class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-		font-size: var(--zk-size-11);
+		font-size: 11px;
 	}
 }
 
@@ -353,21 +226,21 @@ html,body {
 }
 <%-- default font size for mobile --%>
 .mobile [class*="z-"]:not([class*="z-icon-"]):not([class*="z-group-icon-"]) {
-	font-size: var(--zk-size-15);
+    font-size: 15px;
 }
 <%-- the not=xyz is needed to get this selected over standard zk rule --%>
 .mobile [class*="z-icon-"]:not([class*="xyz"]), .mobile [class*="z-group-icon-"] {
-	font-size: var(--zk-size-15);
+    font-size: 15px;
 }
 
 <%-- vbox fix for firefox and ie --%>
 table.z-vbox > tbody > tr > td > table {
-	width: var(--zk-size-full);	
+	width: 100%;	
 }
 
 <%-- decorate file drop area --%>
 .attachment-drag-entered {
-	border: var(--zk-size-5) dashed var(--zk-color-drag-highlight) !important;
+    border: 5px dashed var(--zk-color-drag-highlight) !important;
 }
 
 <c:include page="fragment/login.css.dsp" />

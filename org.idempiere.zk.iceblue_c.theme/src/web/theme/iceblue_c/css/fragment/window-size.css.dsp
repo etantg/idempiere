@@ -1,429 +1,402 @@
-:root {
-	--zk-window-size-dimension-dialog-md: var(--zk-dimension-dialog-md);
-	--zk-window-size-dimension-dialog-sm: var(--zk-dimension-dialog-sm);
-	--zk-window-size-size-1000: var(--zk-size-1000);
-	--zk-window-size-size-260: var(--zk-size-260);
-	--zk-window-size-size-350: var(--zk-size-350);
-	--zk-window-size-size-380: var(--zk-size-380);
-	--zk-window-size-size-410: var(--zk-size-410);
-	--zk-window-size-size-420: var(--zk-size-420);
-	--zk-window-size-size-450: var(--zk-size-450);
-	--zk-window-size-size-480: var(--zk-size-480);
-	--zk-window-size-size-500: var(--zk-size-500);
-	--zk-window-size-size-540: var(--zk-size-540);
-	--zk-window-size-size-550: var(--zk-size-550);
-	--zk-window-size-size-640: var(--zk-size-640);
-	--zk-window-size-size-700: var(--zk-size-700);
-	--zk-window-size-size-750: var(--zk-size-750);
-	--zk-window-size-size-800: var(--zk-size-800);
-	--zk-window-size-size-80pct: var(--zk-size-80pct);
-	--zk-window-size-size-85pct: var(--zk-size-85pct);
-	--zk-window-size-size-88pct: var(--zk-size-88pct);
-	--zk-window-size-size-900: var(--zk-size-900);
-	--zk-window-size-size-full: var(--zk-size-full);
-	--zk-window-size-space-md: var(--zk-space-md);
-	--zk-window-size-space-xl: var(--zk-space-xl);
-}
-
 .about-window {
-	width: var(--zk-window-size-size-800);
-	height: var(--zk-window-size-dimension-dialog-md);
+	width: 800px;
+	height: var(--zk-dimension-dialog-md);
 }
 @media screen and (max-width: 375px) {
 	.about-window {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.about-window {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .customize-grid-view-dialog {
-	width: var(--zk-window-size-dimension-dialog-md);
-	height: var(--zk-window-size-size-500);
+	width: var(--zk-dimension-dialog-md);
+	height: 500px;
 }
 @media screen and (max-width: 600px) {
 	.customize-grid-view-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.customize-grid-view-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .attachment-dialog.popup-dialog.z-window.z-window-overlapped {
-	width: var(--zk-window-size-size-700);
-	height: var(--zk-window-size-size-85pct);
+	width: 700px;
+	height: 85%;
 }
 @media screen and (max-width: 700px) {
 	.attachment-dialog.popup-dialog.z-window.z-window-overlapped {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.attachment-dialog.popup-dialog.z-window.z-window-overlapped {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .chat-dialog.popup-dialog.z-window.z-window-overlapped {
-	height: var(--zk-window-size-size-88pct);
-	width: var(--zk-window-size-size-500);
+	height: 88%;
+	width: 500px;
 }
 @media screen and (max-width: 500px) {
 	.chat-dialog.popup-dialog.z-window.z-window-overlapped {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.chat-dialog.popup-dialog.z-window.z-window-overlapped {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .email-dialog {
-	height: var(--zk-window-size-size-80pct);
-	width: var(--zk-window-size-size-80pct);
+	height: 80%;
+	width: 80%;
 }
 @media screen and (max-width: 600px) {
 	.email-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.email-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .field-record-info-dialog {
-	width: var(--zk-window-size-size-640);
-	height: var(--zk-window-size-size-480);
+	width: 640px;
+	height: 480px;
 }
 @media screen and (max-width: 640px) {
 	.field-record-info-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 480px) {
 	.field-record-info-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }	
 
 .record-info-dialog {
-	width: var(--zk-window-size-size-800);
-	height: var(--zk-window-size-dimension-dialog-md);
+	width: 800px;
+	height: var(--zk-dimension-dialog-md);
 }
 @media screen and (max-width: 800px) {
 	.record-info-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.record-info-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .value-preference-dialog {
-	width: var(--zk-window-size-size-500);
+	width: 500px;
 }
 @media screen and (max-width: 500px) {
 	.value-preference-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .pattribute-dialog {
-	width: var(--zk-window-size-size-500);
+	width: 500px;
 }
 @media screen and (max-width: 500px) {
 	.pattribute-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .pattribute-instance-dialog {
-	width: var(--zk-window-size-size-1000);
-	height: var(--zk-window-size-size-550);
+	width: 1000px;
+	height: 550px;
 }
 @media screen and (max-width: 1000px) {
 	.pattribute-instance-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 550px) {
 	.pattribute-instance-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .account-dialog {
-	height: var(--zk-window-size-size-500);
-	width: var(--zk-window-size-size-750);
+	height: 500px;
+	width: 750px;
 }
 @media screen and (max-width: 750px) {
 	.account-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.account-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 @media screen and (max-width: 719px) {
 	.account-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .invoice-history-dialog {
-	width: var(--zk-window-size-size-700);
-	height: var(--zk-window-size-size-500);
+	width: 700px;
+	height: 500px;
 }
 @media screen and (max-width: 700px) {
 	.invoice-history-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.invoice-history-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .create-from-window {
-	width: var(--zk-window-size-size-750);
-	height: var(--zk-window-size-size-550);
+	width: 750px;
+	height: 550px;
 }
 @media screen and (max-width: 750px) {
 	.create-from-window {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 550px) {
 	.create-from-window {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .create-from-form {
-	width: var(--zk-window-size-size-750);
-	height: var(--zk-window-size-size-550);
+	width: 750px;
+	height: 550px;
 }
 @media screen and (max-width: 750px) {
 	.create-from-form {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 550px) {
 	.create-from-form {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .payment-form-dialog {
-	width: var(--zk-window-size-size-500);
+	width: 500px;
 }
 @media screen and (max-width: 500px) {
 	.payment-form-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .process-parameter-form-dialog {
-	width: var(--zk-window-size-size-500);
+	width: 500px;
 }
 @media screen and (max-width: 500px) {
 	.process-parameter-form-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .quick-entry-dialog {
-	width: var(--zk-window-size-size-350);
+	width: 350px;
 }
 .quick-entry-dialog > .z-window-content {
 	overflow: auto;
-	padding: var(--zk-window-size-space-md);	
+	padding: var(--zk-space-md);	
 }
 .quick-entry-dialog > .z-window-content > .confirm-panel {
-	padding-top: var(--zk-window-size-space-md);
+	padding-top: var(--zk-space-md);
 }
 @media screen and (max-width: 350px) {
 	.quick-entry-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.quick-entry-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .feedback-request-dialog {
-	width: var(--zk-window-size-dimension-dialog-sm);
-	height: var(--zk-window-size-dimension-dialog-md);
+	width: var(--zk-dimension-dialog-sm);
+	height: var(--zk-dimension-dialog-md);
 }
 @media screen and (max-width: 400px) {
 	.feedback-request-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 600px) {
 	.feedback-request-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .request-dialog {
-	width: var(--zk-window-size-dimension-dialog-sm);
-	height: var(--zk-window-size-size-550);
+	width: var(--zk-dimension-dialog-sm);
+	height: 550px;
 }
 @media screen and (max-width: 400px) {
 	.request-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 550px) {
 	.request-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .image-dialog {
-	width: var(--zk-window-size-size-640);
-	height: var(--zk-window-size-size-540);
+	width: 640px;
+	height: 540px;
 }
 @media screen and (max-width: 640px) {
 	.image-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 540px) {
 	.image-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .doc-action-dialog {
-	width: var(--zk-window-size-size-410);
+	width: 410px;
 }
 @media screen and (max-width: 410px) {
 	.doc-action-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .assignment-dialog {
-	width: var(--zk-window-size-dimension-dialog-md);
+	width: var(--zk-dimension-dialog-md);
 }
 @media screen and (max-width: 600px) {
 	.assignment-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 
 .location-dialog {
-	height: var(--zk-window-size-size-420);
+	height: 420px;
 }
 .location-dialog > .z-window-content > .z-borderlayout {
-	min-width: var(--zk-window-size-size-380);
+	min-width: 380px;
 }
 .location-dialog .field-label {
 	white-space: nowrap;
 }
 .location-dialog .confirm-panel {
-	padding: var(--zk-window-size-space-md) var(--zk-window-size-space-xl);
+	padding: var(--zk-space-md) var(--zk-space-xl);
 }
 @media screen and (max-width: 380px) {
 	.location-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 420px) {
 	.location-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .locator-dialog {
-	width: var(--zk-window-size-size-260);
-	height: var(--zk-window-size-size-350);
+	width: 260px;
+	height: 350px;
 }
 @media screen and (max-width: 260px) {
 	.locator-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 350px) {
 	.locator-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .media-dialog {
-	width: var(--zk-window-size-size-500);
-	height: var(--zk-window-size-size-500);
+	width: 500px;
+	height: 500px;
 }
 @media screen and (max-width: 500px) {
 	.media-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.media-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .text-editor-dialog {
-	width: var(--zk-window-size-size-800);
-	height: var(--zk-window-size-size-450);
+	width: 800px;
+	height: 450px;
 }
 @media screen and (max-width: 800px) {
 	.text-editor-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 450px) {
 	.text-editor-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .create-from-bank-statement.create-from-window {
-	width: var(--zk-window-size-size-900);
-	height: var(--zk-window-size-size-800);
+	width: 900px;
+	height: 800px;
 }
 @media screen and (max-width: 900px) {
 	.create-from-bank-statement.create-from-window {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 800px) {
 	.create-from-bank-statement.create-from-window {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
 
 .chosenbox-assistant-dialog {
-	height: var(--zk-window-size-dimension-dialog-md);
-	width: var(--zk-window-size-size-700);
+	height: var(--zk-dimension-dialog-md);
+	width: 700px;
 }
 @media screen and (max-width: 500px) {
 	.chosenbox-assistant-dialog {
-		width: var(--zk-window-size-size-full);
+		width: 100%;
 	}
 }
 @media screen and (max-height: 500px) {
 	.chosenbox-assistant-dialog {
-		height: var(--zk-window-size-size-full);
+		height: 100%;
 	}
 }
