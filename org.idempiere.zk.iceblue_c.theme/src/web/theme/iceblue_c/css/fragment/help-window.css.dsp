@@ -2,10 +2,10 @@
 	position: relative;
 }
 .help-window-header {
-	padding: var(--zk-space-2xl) 0 10px var(--zk-space-5xl);
+	padding: var(--zk-space-2xl) 0 var(--zk-space-2xl) var(--zk-space-5xl);
 }
 .help-window-title {
-	color: red;
+	color: var(--zk-color-danger-active);
 }
 .help-window-description {
 }
