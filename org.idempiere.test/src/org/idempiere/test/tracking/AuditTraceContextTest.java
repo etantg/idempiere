@@ -126,7 +126,7 @@ public class AuditTraceContextTest extends AbstractTestCase {
 		int AD_Note_ID = 0;
 		int AD_Attachment_ID = 0;
 		try {
-			process = MProcess.get(236); // Storage Detail
+			process = MProcess.get(DictionaryIDs.AD_Process.RV_Storage.id); // Storage Detail
 			pi = new ProcessInfo(process.getName(), process.getAD_Process_ID());
 			pi.setReportType("PDF");
 			pi.setAD_Client_ID(getAD_Client_ID());
@@ -198,17 +198,21 @@ public class AuditTraceContextTest extends AbstractTestCase {
 			AuditTraceContext.clear();
 		}
 		
-		Query query = new Query(Env.getCtx(), MChangeLog.Table_Name, 
-				MChangeLog.COLUMNNAME_AD_Table_ID + "=? AND " + MChangeLog.COLUMNNAME_Record_ID + "=?", null);
+		Query query = new Query(Env.getCtx(), MChangeLog.Table_Name,
+				MChangeLog.COLUMNNAME_AD_Table_ID + "=? AND "
+				+ MChangeLog.COLUMNNAME_Record_ID + "=? AND "
+				+ MChangeLog.COLUMNNAME_EventChangeLog + "=?", null);
 		if (AD_Note_ID > 0) {
-			List<MChangeLog> changeLogs = query.setParameters(MNote.Table_ID, AD_Note_ID).list();
+			List<MChangeLog> changeLogs = query.setParameters(
+					MNote.Table_ID, AD_Note_ID, MChangeLog.EVENTCHANGELOG_Delete).list();
 			assertFalse(changeLogs.isEmpty(), "No change log found");
 			for (MChangeLog changeLog : changeLogs)
 				assertEquals(externalTraceId, changeLog.getExternalTraceId(), "Unexpected ExternalTraceId");
 		}
 		
 		if (AD_Attachment_ID > 0) {
-			List<MChangeLog> changeLogs = query.setParameters(MAttachment.Table_ID, AD_Attachment_ID).list();
+			List<MChangeLog> changeLogs = query.setParameters(
+					MAttachment.Table_ID, AD_Attachment_ID, MChangeLog.EVENTCHANGELOG_Delete).list();
 			assertFalse(changeLogs.isEmpty(), "No change log found");
 			for (MChangeLog changeLog : changeLogs)
 				assertEquals(externalTraceId, changeLog.getExternalTraceId(), "Unexpected ExternalTraceId");
