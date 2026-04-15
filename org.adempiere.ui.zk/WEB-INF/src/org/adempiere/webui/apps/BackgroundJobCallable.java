@@ -95,7 +95,8 @@ public class BackgroundJobCallable implements Callable<ProcessInfo>
 	public ProcessInfo call() {
 		try {
 			ServerContext.setCurrentInstance(m_ctx);
-			AuditTraceContext.setExternalTraceId(m_externalTraceId);
+			if (!Util.isEmpty(m_externalTraceId))
+				AuditTraceContext.setExternalTraceId(m_externalTraceId);
 			return doRun();
 		} finally {
 			ServerContext.dispose();

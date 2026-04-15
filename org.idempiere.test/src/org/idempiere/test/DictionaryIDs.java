@@ -890,7 +890,7 @@ public final class DictionaryIDs {
 		CREATE_TABLE(200134),
 		AD_TABLE_CREATE_PARTITION(200157),
 		DETACH_OR_REATTACH_PARTITION(200158),
-		RV_Storage(236);
+		RV_STORAGE(236);
 		
 		public final int id;
 
