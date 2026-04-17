@@ -6,9 +6,7 @@
     provider-name="iDempiere Community">
 
   <description url="https://www.idempiere.org">
-    Core iDempiere platform. Provides OSGi runtime, ZK Web UI,
-    application server, JasperReports engine, database providers,
-    Hazelcast clustering, and Bouncy Castle cryptography.
+    Core iDempiere installation
   </description>
 
   <copyright url="https://www.idempiere.org">
@@ -64,10 +62,6 @@
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
   <plugin id="org.compiere.db.oracle.provider"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
-		  
-  <!-- Accounting -->
-  <plugin id="org.idempiere.acct"
-          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
   <!-- Infrastructure -->
   <plugin id="org.idempiere.hazelcast.service"
@@ -93,6 +87,10 @@
 
   <!-- SSO / OIDC -->
   <plugin id="org.idempiere.ui.sso.oidc"
+          download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+		  
+  <!-- Extension Manager -->
+  <plugin id="org.idempiere.extension.manager"
           download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 		  
 </feature>

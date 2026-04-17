@@ -10,6 +10,12 @@
    <feature id="org.eclipse.equinox.executable">
       <category name="idempiere.server"/>
    </feature>
+
+   <!-- Profile -->
+   <feature url="features/org.idempiere.core.feature_14.0.0.qualifier.jar"
+            id="org.idempiere.core.feature" version="14.0.0.qualifier">
+      <category name="idempiere.server"/>
+   </feature>
    
    <!-- Core Runtime -->
    <feature url="features/org.idempiere.core.runtime.feature_14.0.0.qualifier.jar"
