@@ -280,7 +280,7 @@ public class InventoryTest extends AbstractTestCase {
 	 * MR2, Product1, ASI2, Qty=100
 	 * Physical Inventory
 	 * 	Line1, Product1, ASI1, QtyBook=1, QtyCount=100
-	 * 	Line2, Product1, ASI1, QtyBook=100, QtyCount=100
+	 * 	Line2, Product1, ASI2, QtyBook=100, QtyCount=100
 	 */
 	@Test
 	public void testZeroDifferenceInventoryLine() {
