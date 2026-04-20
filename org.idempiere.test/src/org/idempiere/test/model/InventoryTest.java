@@ -276,8 +276,11 @@ public class InventoryTest extends AbstractTestCase {
 	
 	/**
 	 * IDEMPIERE-6972
-	 * Doc_Inventory posting fails with "No Costs for <product>" when a physical inventory 
-	 * contains a zero-difference line for a batch/lot-costed product
+	 * MR1, Product1, ASI1, Qty=100
+	 * MR2, Product1, ASI2, Qty=100
+	 * Physical Inventory
+	 * 	Line1, Product1, ASI1, QtyBook=1, QtyCount=100
+	 * 	Line2, Product1, ASI1, QtyBook=100, QtyCount=100
 	 */
 	@Test
 	public void testZeroDifferenceInventoryLine() {
@@ -332,7 +335,9 @@ public class InventoryTest extends AbstractTestCase {
 		if (!inventory.isPosted()) {
 			String error = DocumentEngine.postImmediate(Env.getCtx(), inventory.getAD_Client_ID(), inventory.get_Table_ID(), inventory.get_ID(), false, getTrxName());
 			assertNull(error, error);
+			inventory.load(getTrxName());
 		}
+		assertTrue(inventory.isPosted(), "Inventory should be posted successfully");
 	}
 	
 	private void createPOAndMRForProduct(int productId) {
