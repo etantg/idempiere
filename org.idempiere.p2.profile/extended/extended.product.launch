@@ -75,8 +75,8 @@
     <stringAttribute key="productVersion" value="14.0.0.qualifier"/>
     <setAttribute key="root_features"/>
     <setAttribute key="selected_features">
-		<setEntry value="org.idempiere.extended.feature:default"/>
         <setEntry value="org.idempiere.eclipse.platform.feature:default"/>
+        <setEntry value="org.idempiere.extended.feature:default"/>
     </setAttribute>
     <setAttribute key="selected_target_bundles">
         <setEntry value="bcmail@default:default"/>
@@ -398,8 +398,8 @@
         <setEntry value="org.w3c.dom.smil@default:default"/>
         <setEntry value="org.w3c.dom.svg@default:default"/>
         <setEntry value="org.zkoss.zsoup@default:default"/>
-        <setEntry value="slf4j.api*2.0.17@3:true"/>
-        <setEntry value="slf4j.jdk14@3:true"/>
+        <setEntry value="slf4j.api*2.0.12@3:true"/>
+        <setEntry value="slf4j.jdk14@2.0.12:true"/>
         <setEntry value="stax2-api@default:default"/>
         <setEntry value="wrapped.com.google.http-client.google-http-client-gson@default:default"/>
         <setEntry value="wrapped.com.google.zxing.javase@default:default"/>
@@ -467,8 +467,8 @@
         <setEntry value="org.apache.ecs@default:default"/>
         <setEntry value="org.compiere.db.oracle.provider@default:default"/>
         <setEntry value="org.compiere.db.postgresql.provider@default:default"/>
-		<setEntry value="org.idempiere.acct@5:true"/>
-		<setEntry value="org.idempiere.extension.manager@default:true"/>
+        <setEntry value="org.idempiere.acct@5:true"/>
+        <setEntry value="org.idempiere.extension.manager@default:true"/>
         <setEntry value="org.idempiere.felix.webconsole@default:true"/>
         <setEntry value="org.idempiere.hazelcast.service@default:default"/>
         <setEntry value="org.idempiere.jetty.osgi.boot.fragment@default:false"/>

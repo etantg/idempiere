@@ -275,7 +275,7 @@
         <setEntry value="org.eclipse.jetty.ee8.apache-jsp@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.glassfish.jstl@default:default"/>
         <setEntry value="org.eclipse.jetty.ee8.jndi@default:default"/>
-        <setEntry value="org.eclipse.jetty.ee8.osgi.boot.jsp@default:false"/>
+        <setEntry value="org.eclipse.jetty.ee8.osgi.boot.jsp@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.osgi.boot@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.plus@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.proxy@default:default"/>
@@ -398,8 +398,8 @@
         <setEntry value="org.w3c.dom.smil@default:default"/>
         <setEntry value="org.w3c.dom.svg@default:default"/>
         <setEntry value="org.zkoss.zsoup@default:default"/>
-        <setEntry value="slf4j.api*2.0.17@3:true"/>
-        <setEntry value="slf4j.jdk14@3:true"/>
+        <setEntry value="slf4j.api*2.0.12@3:true"/>
+        <setEntry value="slf4j.jdk14@2.0.12:true"/>
         <setEntry value="stax2-api@default:default"/>
         <setEntry value="wrapped.com.google.http-client.google-http-client-gson@default:default"/>
         <setEntry value="wrapped.com.google.zxing.javase@default:default"/>
