@@ -133,7 +133,6 @@
 				<module>org.idempiere.hazelcast.service</module>
 				<module>org.idempiere.felix.webconsole</module>
 				<module>org.apache.ecs</module>
-				<module>org.idempiere.bouncy.castle-feature</module>
 				<module>org.idempiere.tablepartition</module>
 				
 				<!-- Installation -->
@@ -154,6 +153,14 @@
 				<module>org.idempiere.core.runtime-feature</module>
 				<module>org.idempiere.eclipse.platform-feature</module>
 				<module>org.idempiere.equinox.p2.director-feature</module>
+				
+				<module>org.idempiere.felix.webconsole-feature</module>
+				<module>org.adempiere.report.jasper-feature</module>
+				<module>org.adempiere.pipo-feature</module>
+				<module>org.idempiere.hazelcast.service-feature</module>
+				<module>org.compiere.db.provider-feature</module>
+				<module>org.idempiere.bouncy.castle-feature</module>
+				<module>org.idempiere.zk-feature</module>
 			</modules>
 		</profile>
 		
