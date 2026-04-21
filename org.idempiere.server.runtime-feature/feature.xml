@@ -18,5 +18,9 @@
    <license url="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">
       GNU General Public License Version 2
    </license>
+   
+   <includes
+         id="org.idempiere.core.feature"
+         version="0.0.0"/>
 
 </feature>
