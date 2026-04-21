@@ -32,7 +32,8 @@
 
    <features>
       <feature id="org.idempiere.extended.feature"/>
-      <feature id="org.idempiere.core.runtime.feature"/>
+	  <!-- Stripe down version of org.adempiere.server.feature for core and extended builds -->
+      <feature id="org.idempiere.server.runtime.feature"/>
       <feature id="org.idempiere.eclipse.platform.feature"/>
    </features>
 

@@ -9,9 +9,9 @@
     <version>${revision}</version>
     <relativePath>../org.idempiere.parent/pom.xml</relativePath>
   </parent>
-  <artifactId>org.idempiere.core.runtime.feature</artifactId>
+  <artifactId>org.idempiere.server.runtime.feature</artifactId>
   <packaging>eclipse-feature</packaging>
-  <name>org.idempiere.core.runtime.feature</name>
+  <name>org.idempiere.server.runtime.feature</name>
 
   <build>
     <plugins>

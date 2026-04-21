@@ -17,9 +17,9 @@
       <category name="idempiere.server"/>
    </feature>
    
-   <!-- Core Runtime -->
-   <feature url="features/org.idempiere.core.runtime.feature_14.0.0.qualifier.jar"
-            id="org.idempiere.core.runtime.feature" version="14.0.0.qualifier">
+   <!-- Stripe down version of org.adempiere.server.feature for core and extended builds -->
+   <feature url="features/org.idempiere.server.runtime.feature_14.0.0.qualifier.jar"
+            id="org.idempiere.server.runtime.feature" version="14.0.0.qualifier">
       <category name="idempiere.server"/>
    </feature>
    

@@ -150,7 +150,8 @@
 				<module>org.idempiere.extension.manager</module>
 
 				<!-- Features -->
-				<module>org.idempiere.core.runtime-feature</module>
+				<!-- Stripe down version of org.adempiere.server.feature for core and extended builds -->
+				<module>org.idempiere.server.runtime-feature</module>
 				<module>org.idempiere.eclipse.platform-feature</module>
 				<module>org.idempiere.equinox.p2.director-feature</module>
 				
