@@ -25,6 +25,7 @@
    <plugin id="org.idempiere.zk.breeze.theme" version="0.0.0"/>
    <plugin id="org.idempiere.zk.iceblue_c.theme" version="0.0.0"/>
    <plugin id="javax.websocket-api.fragment" version="0.0.0"/>
+   <plugin id="org.owasp.encoder" version="0.0.0"/>
    
    <includes
          id="org.idempiere.felix.webconsole.feature"
