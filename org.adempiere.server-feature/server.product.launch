@@ -19,7 +19,6 @@
         <setEntry value="org.eclipse.jetty.deploy:12.0.11:default:true:default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.annotations:12.0.11:default:true:default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.apache-jsp:12.0.11:default:true:default:true"/>
-        <setEntry value="org.eclipse.jetty.ee8.osgi.boot.jsp:12.0.11:default:true:default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.osgi.boot:12.0.11:default:true:default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.plus:12.0.11:default:true:default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.security.jaspi:12.0.11:default:true:default:true"/>
@@ -275,7 +274,7 @@
         <setEntry value="org.eclipse.jetty.ee8.apache-jsp@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.glassfish.jstl@default:default"/>
         <setEntry value="org.eclipse.jetty.ee8.jndi@default:default"/>
-        <setEntry value="org.eclipse.jetty.ee8.osgi.boot.jsp@default:true"/>
+        <setEntry value="org.eclipse.jetty.ee8.osgi.boot.jsp@default:false"/>
         <setEntry value="org.eclipse.jetty.ee8.osgi.boot@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.plus@default:true"/>
         <setEntry value="org.eclipse.jetty.ee8.proxy@default:default"/>
