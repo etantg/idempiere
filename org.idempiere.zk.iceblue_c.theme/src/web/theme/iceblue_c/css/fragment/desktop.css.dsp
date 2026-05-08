@@ -95,10 +95,6 @@
 	padding: 8px;
 }
 
-#userPanelLinksContainer {
-	width: auto;
-}
-
 <%-- main desktop layout (border layout) --%>
 .desktop-layout {
 	position: absolute; 
