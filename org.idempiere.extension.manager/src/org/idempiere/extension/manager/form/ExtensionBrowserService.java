@@ -24,6 +24,7 @@ package org.idempiere.extension.manager.form;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -38,6 +39,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -47,10 +49,12 @@ import org.adempiere.base.Core;
 import org.adempiere.base.markdown.IMarkdownRenderer;
 import org.adempiere.exceptions.AdempiereException;
 import org.adempiere.util.Callback;
+import org.adempiere.util.ServerContext;
 import org.compiere.model.MExtension;
 import org.compiere.model.MExtensionEntity;
 import org.compiere.model.MTable;
 import org.compiere.model.PO;
+import org.compiere.model.POInfo;
 import org.compiere.model.MPackageImp;
 import org.compiere.model.MPackageImpDetail;
 import org.compiere.model.Query;
@@ -93,16 +97,10 @@ public class ExtensionBrowserService {
 
 		String indexUrl = toRawGithubURL(repoUrl, "index.json");
 
-		// add reasonable timeout
-		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(indexUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+		String body = fetchString(indexUrl);
 		
-		if (response.statusCode() == 200) {
-			JsonObject indexObj = JsonParser.parseString(response.body()).getAsJsonObject();
-			return indexObj.getAsJsonArray("extensions");
-		} else {
-			throw new RuntimeException(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[] {response.statusCode(), "index.json"})); //Http {0} fetching {1}
-		}
+		JsonObject indexObj = JsonParser.parseString(body).getAsJsonObject();
+		return indexObj.getAsJsonArray("extensions");
 	}
 
 	/**
@@ -127,15 +125,7 @@ public class ExtensionBrowserService {
 		String rawUrl = toRawGithubPath(url);
 		
 		try {
-			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(rawUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-			HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-			
-			String markdown = "";
-			if (response.statusCode() == 200) {
-				markdown = response.body();
-			} else {
-				throw new Exception(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[] {response.statusCode(), rawUrl})); //Http {0} fetching {1}
-			}
+			String markdown = fetchString(rawUrl);
 			
 			IMarkdownRenderer renderer = Core.getMarkdownRenderer();
 			String baseUrl = rawUrl;
@@ -167,21 +157,16 @@ public class ExtensionBrowserService {
 	public ExtensionMetadata fetchExtensionMetadata(String url) throws Exception {
 		if (url == null || url.isEmpty()) return null;
 		
+		// if url starts with file:, read from file
 		String rawUrl = toRawGithubPath(url);
-		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(rawUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-		HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+		String responseBody = fetchString(rawUrl);
 		
-		if (response.statusCode() == 200) {
-			String responseBody = response.body();
-			List<String> errors = ExtensionMetadataValidator.validate(responseBody);
-			if (!errors.isEmpty()) {
-				throw new AdempiereException("Metadata Validation Error:\n" + String.join("\n", errors));
-			}
-			JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
-			return new ExtensionMetadata(json);
-		} else {
-			throw new RuntimeException(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[] {response.statusCode(), rawUrl}));
+		List<String> errors = ExtensionMetadataValidator.validate(responseBody);
+		if (!errors.isEmpty()) {
+			throw new AdempiereException("Metadata Validation Error:\n" + String.join("\n", errors));
 		}
+		JsonObject json = JsonParser.parseString(responseBody).getAsJsonObject();
+		return new ExtensionMetadata(json);
 	}
 
 	/**
@@ -191,6 +176,9 @@ public class ExtensionBrowserService {
 	 * @return
 	 */
 	public String toRawGithubURL(String repoUrl, String relativePath) {
+		if (repoUrl.startsWith("file:")) {
+			return repoUrl.endsWith("/") ? repoUrl + relativePath : repoUrl + "/" + relativePath;
+		}
 		if (repoUrl.contains("github.com"))
 			repoUrl = repoUrl.replace("github.com", "raw.githubusercontent.com");
 		String rawUrl = repoUrl.endsWith("/") ? repoUrl + "main/" + relativePath : repoUrl + "/main/" + relativePath;
@@ -203,6 +191,9 @@ public class ExtensionBrowserService {
 	 * @return
 	 */
 	private String toRawGithubPath(String absolutePath) {
+		if (absolutePath.startsWith("file:")) {
+			return absolutePath;
+		}
 		if (absolutePath.contains("github.com") && absolutePath.contains("/blob/")) {
 			absolutePath = absolutePath.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
 		}
@@ -365,10 +356,18 @@ public class ExtensionBrowserService {
 				.setParameters(mExtension.getAD_Extension_ID())
 				.list();
 		for (MExtensionEntity entity : entities) {
-			PO po = MTable.get(Env.getCtx(), entity.getAD_Table_ID()).getPOByUU(entity.getRecord_UU(), null);
+			MTable table = MTable.get(Env.getCtx(), entity.getAD_Table_ID());
+			if (table == null)
+				continue;
+			POInfo poInfo = POInfo.getPOInfo(Env.getCtx(), table.getAD_Table_ID());
+			if (poInfo == null || poInfo.getTableName() == null)
+				continue;
+			PO po = table.getPOByUU(entity.getRecord_UU(), null);
 			if (po != null) {
-				po.set_Value("IsActive", false);
-				po.saveEx();
+				if (po.get_ColumnIndex("IsActive") >= 0) {
+					if (po.set_Value("IsActive", false))
+						po.saveEx();
+				}
 			}
 		}
 	}
@@ -425,10 +424,18 @@ public class ExtensionBrowserService {
 				.setParameters(mExtension.getAD_Extension_ID())
 				.list();
 		for (MExtensionEntity entity : entities) {
-			PO po = MTable.get(Env.getCtx(), entity.getAD_Table_ID()).getPOByUU(entity.getRecord_UU(), null);
+			MTable table = MTable.get(Env.getCtx(), entity.getAD_Table_ID());
+			if (table == null)
+				continue;
+			POInfo poInfo = POInfo.getPOInfo(Env.getCtx(), table.getAD_Table_ID());
+			if (poInfo == null || poInfo.getTableName() == null)
+				continue;
+			PO po = table.getPOByUU(entity.getRecord_UU(), null);
 			if (po != null) {
-				po.set_Value("IsActive", true);
-				po.saveEx();
+				if (po.get_ColumnIndex("IsActive") >= 0) {
+					if (po.set_Value("IsActive", true))
+						po.saveEx();
+				}
 			}
 		}
 	}
@@ -451,11 +458,15 @@ public class ExtensionBrowserService {
 			if (extension.hasInfoUrl()) {
 				String infoUrl = extension.getInfoUrl();
 				infoUrl = toRawGithubPath(infoUrl);
-				HttpRequest reqInfo = HttpRequest.newBuilder().uri(URI.create(infoUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-				HttpResponse<byte[]> resInfo = httpClient.send(reqInfo, HttpResponse.BodyHandlers.ofByteArray());
-				if (resInfo.statusCode() == 200) {
+				byte[] data = null;
+				try {
+					data = fetchBytes(infoUrl);
+				} catch (Exception e) {
+					log.log(Level.WARNING, "Failed to fetch info: " + infoUrl, e);
+				}
+				if (data != null) {
 					zos.putNextEntry(new ZipEntry("info.md"));
-					zos.write(resInfo.body());
+					zos.write(data);
 					zos.closeEntry();
 				}
 			}
@@ -464,11 +475,13 @@ public class ExtensionBrowserService {
 			if (extension.hasChangeLogUrl()) {
 				String changelogUrl = extension.getChangeLogUrl();
 				changelogUrl = toRawGithubPath(changelogUrl);
-				HttpRequest reqChangelog = HttpRequest.newBuilder().uri(URI.create(changelogUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-				HttpResponse<byte[]> resChangelog = httpClient.send(reqChangelog, HttpResponse.BodyHandlers.ofByteArray());
-				if (resChangelog.statusCode() == 200) {
+				byte[] data = null;
+				try {
+					data = fetchBytes(changelogUrl);
+				} catch (Exception e) {}
+				if (data != null) {
 					zos.putNextEntry(new ZipEntry("CHANGELOG.md"));
-					zos.write(resChangelog.body());
+					zos.write(data);
 					zos.closeEntry();
 				}
 			}
@@ -483,11 +496,13 @@ public class ExtensionBrowserService {
 						aUrl = toRawGithubPath(aUrl);
 						String assetName = Paths.get(a.get("name").getAsString()).getFileName().toString();
 						try {
-							HttpRequest reqAsset = HttpRequest.newBuilder().uri(URI.create(aUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-							HttpResponse<byte[]> resAsset = httpClient.send(reqAsset, HttpResponse.BodyHandlers.ofByteArray());
-							if (resAsset.statusCode() == 200) {
+							byte[] data = null;
+							try {
+								data = fetchBytes(aUrl);
+							} catch (Exception e) {}
+							if (data != null) {
 								zos.putNextEntry(new ZipEntry("assets/" + assetName));
-								zos.write(resAsset.body());
+								zos.write(data);
 								zos.closeEntry();
 							}
 						} catch (Exception e) {
@@ -504,17 +519,19 @@ public class ExtensionBrowserService {
 					JsonObject b = bel.getAsJsonObject();
 					if (b.has("downloadUrl")) {
 						String dUrl = toRawGithubPath(b.getAsJsonPrimitive("downloadUrl").getAsString());
-						HttpRequest reqJar = HttpRequest.newBuilder().uri(URI.create(dUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-						HttpResponse<InputStream> resJar = httpClient.send(reqJar, HttpResponse.BodyHandlers.ofInputStream());
-						if (resJar.statusCode() == 200) {
-							String fileName = Paths.get(URI.create(dUrl).getPath()).getFileName().toString();
-							if (!fileName.endsWith(".jar") && b.has("symbolicName")) {
-								fileName = b.getAsJsonPrimitive("symbolicName").getAsString() + ".jar";
-							}
-							zos.putNextEntry(new ZipEntry("bundles/" + fileName));
-							resJar.body().transferTo(zos);
-							zos.closeEntry();
+						var fileNamePath = Paths.get(URI.create(dUrl).getPath()).getFileName();
+						String fileName = fileNamePath != null ? fileNamePath.toString() : "";
+						if (!fileName.endsWith(".jar") && b.has("symbolicName")) {
+							fileName = b.getAsJsonPrimitive("symbolicName").getAsString() + ".jar";
 						}
+						if (!fileName.endsWith(".jar")) {
+							log.log(Level.WARNING, "Failed to get file name: " + dUrl);
+							continue;
+						}
+						
+						zos.putNextEntry(new ZipEntry("bundles/" + fileName));
+						streamTo(dUrl, zos);
+						zos.closeEntry();
 					}
 				}
 			}
@@ -580,34 +597,41 @@ public class ExtensionBrowserService {
 	 * @param extension
 	 */
 	public void syncExtensionEntities(MExtension mExtension, ExtensionMetadata extension) {
+		final Properties ctx = new Properties();
+		ctx.putAll(ServerContext.getCurrentInstance());
 		CompletableFuture.runAsync(() -> {
-			if (!extension.hasBundles()) return;
-			JsonArray bundles = extension.getBundles();
-			for (JsonElement bel : bundles) {
-				String symbolicName = bel.getAsJsonObject().get("symbolicName").getAsString();
-				List<MPackageImp> imps = new Query(Env.getCtx(), MPackageImp.Table_Name, "Name=? AND PK_Status=?", null)
-						.setParameters(symbolicName, MPackageImp.PACKAGE_STATUS_COMPLETED)
-						.setOnlyActiveRecords(true)
-						.list();
-				for (MPackageImp imp : imps) {
-					List<MPackageImpDetail> details = new Query(Env.getCtx(), MPackageImpDetail.Table_Name, "AD_Package_Imp_ID=? AND Success=? AND Action IN (?,?)", null)
-							.setParameters(imp.getAD_Package_Imp_ID(), MPackageImpDetail.ACTION_STATUS_SUCCESS, MPackageImpDetail.ACTION_INSERT, MPackageImpDetail.ACTION_UPDATE)
+			try {
+				ServerContext.setCurrentInstance(ctx);
+				if (!extension.hasBundles()) return;
+				JsonArray bundles = extension.getBundles();
+				for (JsonElement bel : bundles) {
+					String symbolicName = bel.getAsJsonObject().get("symbolicName").getAsString();
+					List<MPackageImp> imps = new Query(Env.getCtx(), MPackageImp.Table_Name, "Name=? AND PK_Status=?", null)
+							.setParameters(symbolicName, MPackageImp.PACKAGE_STATUS_COMPLETED)
 							.setOnlyActiveRecords(true)
 							.list();
-					for (MPackageImpDetail detail : details) {
-						MExtensionEntity entity = new Query(Env.getCtx(), MExtensionEntity.Table_Name, "AD_Extension_ID=? AND AD_Table_ID=? AND Record_UU=?", null)
-								.setParameters(mExtension.getAD_Extension_ID(), detail.getAD_Table_ID(), detail.getRecord_UU())
+					for (MPackageImp imp : imps) {
+						List<MPackageImpDetail> details = new Query(Env.getCtx(), MPackageImpDetail.Table_Name, "AD_Package_Imp_ID=? AND Success=? AND Action IN (?,?)", null)
+								.setParameters(imp.getAD_Package_Imp_ID(), MPackageImpDetail.ACTION_STATUS_SUCCESS, MPackageImpDetail.ACTION_INSERT, MPackageImpDetail.ACTION_UPDATE)
 								.setOnlyActiveRecords(true)
-								.first();
-						if (entity == null) {
-							entity = new MExtensionEntity(Env.getCtx(), 0, null);
-							entity.setAD_Extension_ID(mExtension.getAD_Extension_ID());
-							entity.setAD_Table_ID(detail.getAD_Table_ID());
-							entity.setRecord_UU(detail.getRecord_UU());
-							entity.saveEx();
+								.list();
+						for (MPackageImpDetail detail : details) {
+							MExtensionEntity entity = new Query(Env.getCtx(), MExtensionEntity.Table_Name, "AD_Extension_ID=? AND AD_Table_ID=? AND Record_UU=?", null)
+									.setParameters(mExtension.getAD_Extension_ID(), detail.getAD_Table_ID(), detail.getRecord_UU())
+									.setOnlyActiveRecords(true)
+									.first();
+							if (entity == null) {
+								entity = new MExtensionEntity(Env.getCtx(), 0, null);
+								entity.setAD_Extension_ID(mExtension.getAD_Extension_ID());
+								entity.setAD_Table_ID(detail.getAD_Table_ID());
+								entity.setRecord_UU(detail.getRecord_UU());
+								entity.saveEx();
+							}
 						}
 					}
 				}
+			} finally {
+				ServerContext.dispose();
 			}
 		}).exceptionally(e -> {
 			log.log(Level.SEVERE, "Failed to sync extension entities for " + extension.getId(), e);
@@ -875,17 +899,10 @@ public class ExtensionBrowserService {
 			if (statusCallback != null)
 				statusCallback.onCallback(Msg.getMsg(Env.getCtx(), "DownloadingBundleFrom", new Object[]{bundleObj.get("symbolicName").getAsString(), downloadUrl}));
 
-			HttpRequest jarRequest = HttpRequest.newBuilder().uri(URI.create(downloadUrl)).GET().timeout(Duration.ofSeconds(30)).build();
-			HttpResponse<InputStream> jarResponse = httpClient.send(jarRequest, HttpResponse.BodyHandlers.ofInputStream());
-			
-			if (jarResponse.statusCode() != 200) {
-				throw new AdempiereException(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[]{jarResponse.statusCode(), downloadUrl}));
-			}
-			
 			File tempZip = File.createTempFile("extbundle_", ".jar");
 			
-			try (InputStream is = jarResponse.body(); FileOutputStream fos = new FileOutputStream(tempZip)) {
-				is.transferTo(fos);
+			try (FileOutputStream fos = new FileOutputStream(tempZip)) {
+				streamTo(downloadUrl, fos);
 			}
 			
 			if (bundleObj.has("sha256")) {
@@ -942,6 +959,52 @@ public class ExtensionBrowserService {
 		}
 
 		handleInstallationSuccess(metadata);
+	}
+
+	private byte[] fetchBytes(String url) throws Exception {
+		if (url.startsWith("file:")) {
+			validateFileURL(url);
+			try (InputStream is = new URL(url).openStream()) {
+				return is.readAllBytes();
+			}
+		} else {
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().timeout(Duration.ofSeconds(30)).build();
+			HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
+			if (response.statusCode() == 200) {
+				return response.body();
+			}
+			throw new AdempiereException(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[] {response.statusCode(), url}));
+		}
+	}
+
+	private String fetchString(String url) throws Exception {
+		return new String(fetchBytes(url), StandardCharsets.UTF_8);
+	}
+
+	private void streamTo(String url, OutputStream out) throws Exception {
+		if (url.startsWith("file:")) {
+			validateFileURL(url);
+			try (InputStream is = new URL(url).openStream()) {
+				is.transferTo(out);
+			}
+		} else {
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().timeout(Duration.ofSeconds(30)).build();
+			HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+			if (response.statusCode() != 200) {
+				throw new AdempiereException(Msg.getMsg(Env.getCtx(), "HttpFetchFailed", new Object[] {response.statusCode(), url}));
+			}
+			try (InputStream is = response.body()) {
+				is.transferTo(out);
+			}
+		}
+	}
+
+	private void validateFileURL(String downloadUrl) {
+		String repoUrl = SystemProperties.getIDempiereRepositoryUrl();
+		// disallow download of local file if repourl is not file:
+		if (!repoUrl.startsWith("file:")) {
+			throw new AdempiereException("Local file download not supported when iDempiere repository is remote.");
+		}
 	}
 
 	private String calculateSHA256(File file) throws Exception {
