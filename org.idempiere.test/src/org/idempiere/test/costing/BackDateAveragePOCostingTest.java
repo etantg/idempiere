@@ -9903,7 +9903,7 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 			product.saveEx();
 			product.set_TrxName(getTrxName());
 			
-			BigDecimal price = new BigDecimal(23.2896);
+			BigDecimal price = new BigDecimal("23.2896");
 			MPriceListVersion plv1 = MPriceList.get(DictionaryIDs.M_PriceList.IMPORT.id).getPriceListVersion(null);
 			MProductPrice pp1 = new MProductPrice(Env.getCtx(), 0, getTrxName());
 			pp1.setM_PriceList_Version_ID(plv1.getM_PriceList_Version_ID());
@@ -9950,7 +9950,7 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 			orderLine.setProduct(product);
 			orderLine.setQty(new BigDecimal(75));
 			orderLine.setDatePromised(backDate1);
-			orderLine.setPrice(new BigDecimal(23.2896));
+			orderLine.setPrice(new BigDecimal("23.2896"));
 			orderLine.saveEx();
 			
 			ProcessInfo info = MWorkflow.runDocumentActionWorkflow(order, DocAction.ACTION_Complete);
@@ -10475,7 +10475,7 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 			assertEquals(cost1.getCurrentQty().setScale(2, RoundingMode.HALF_UP), cost2.getCurrentQty().setScale(2, RoundingMode.HALF_UP), "Unexpected current quantity");
 			
 			List<MCostDetail> cds = MCostDetail.list(Env.getCtx(), "M_Product_ID=? AND Processed='N'", product.get_ID(), 0, as.getC_AcctSchema_ID(), getTrxName());
-			assertTrue(cds.isEmpty());
+			assertTrue(cds.isEmpty(), "Found unprocessed MCostDetail rows for product=" + product.get_ID() + ", acctSchema=" + as.getC_AcctSchema_ID());
 		}
 	}
 	

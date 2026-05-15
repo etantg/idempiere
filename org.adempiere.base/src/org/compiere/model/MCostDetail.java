@@ -1465,13 +1465,9 @@ public class MCostDetail extends X_M_CostDetail
 							&& mpo.getDateAcct().compareTo(getDateAcct()) == 0
 							&& mpo.getQty().compareTo(il.getQtyInvoiced()) != 0) { 
 						// get the last cost detail from the cost history
-						MCostHistory costHistory = MCostHistory.get(getCtx(), getAD_Client_ID(), Org_ID,
-			                    getM_Product_ID(), as.getM_CostType_ID(), as.getC_AcctSchema_ID(),
-			                    as.getCostingMethod(), ce.getM_CostElement_ID(), M_ASI_ID,
-			                    getDateAcct(), get_TrxName());
-						if (costHistory != null) {
-							cd = new MCostDetail(as.getCtx(), costHistory.getM_CostDetail_ID(), get_TrxName());
-						}
+						cd = getLastCostDetailFromCostHistory(product.getCtx(), product.getAD_Client_ID(), Org_ID, product.getM_Product_ID(), 
+								as.getM_CostType_ID(), as.getC_AcctSchema_ID(), ce.getCostingMethod(), ce.getM_CostElement_ID(), 
+								M_ASI_ID, getDateAcct(), get_TrxName());
 						break;
 					}
 				}
@@ -2116,5 +2112,77 @@ public class MCostDetail extends X_M_CostDetail
 		}
 		
 		return dateAcct;
+	}
+	
+	/**
+	 * Get Last Cost Detail Record from Cost History by Account Date 
+	 * @param ctx context
+	 * @param AD_Client_ID client
+	 * @param AD_Org_ID org
+	 * @param M_Product_ID product
+	 * @param M_CostType_ID cost type
+	 * @param C_AcctSchema_ID as
+	 * @param costingMethod costing method
+	 * @param M_CostElement_ID optional costing element
+	 * @param M_AttributeSetInstance_ID asi
+	 * @param dateAcct account date
+	 * @param trxName transaction name
+	 * @return MCostDetail or null
+	 */
+	private static MCostDetail getLastCostDetailFromCostHistory(Properties ctx, int AD_Client_ID, int AD_Org_ID, int M_Product_ID,
+			int M_CostType_ID, int C_AcctSchema_ID, String costingMethod, int M_CostElement_ID,
+			int M_AttributeSetInstance_ID, Timestamp dateAcct, 
+			String trxName) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT cd.* ");
+		sql.append("FROM M_CostHistory c ");
+		sql.append("JOIN M_CostDetail cd ON (cd.M_CostDetail_ID = c.M_CostDetail_ID AND cd.Processed='Y') ");
+		sql.append("LEFT OUTER JOIN M_CostElement ce ON (c.M_CostElement_ID=ce.M_CostElement_ID) ");
+		sql.append("WHERE c.AD_Client_ID=? AND c.AD_Org_ID=? ");
+		sql.append(" AND c.M_Product_ID=? ");
+		sql.append(" AND (c.M_AttributeSetInstance_ID=? OR c.M_AttributeSetInstance_ID=0) ");
+		sql.append(" AND c.M_CostType_ID=? AND cd.C_AcctSchema_ID=? ");
+		sql.append(" AND (ce.CostingMethod IS NULL OR ce.CostingMethod=?) ");
+		if (M_CostElement_ID > 0)
+			sql.append(" AND c.M_CostElement_ID=? ");
+		sql.append(" AND c.DateAcct<=? ");
+		sql.append("ORDER BY c.M_CostHistory_ID DESC ");
+		sql = new StringBuilder(DB.getDatabase().addPagingSQL(sql.toString(), 1, 1));
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(AD_Client_ID);
+		params.add(AD_Org_ID);
+		params.add(M_Product_ID);
+		params.add(M_AttributeSetInstance_ID);
+		params.add(M_CostType_ID);
+		params.add(C_AcctSchema_ID);
+		params.add(costingMethod);
+		if (M_CostElement_ID > 0)
+			params.add(M_CostElement_ID);
+		params.add(dateAcct);
+		
+		MCostDetail cd = null;
+		PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	try
+    	{
+    		pstmt = DB.prepareStatement(sql.toString(), trxName);
+    		DB.setParameters(pstmt, params);
+    		rs = pstmt.executeQuery();
+    		if (rs.next())
+    		{
+    			cd = new MCostDetail(ctx, rs, trxName);
+    		}
+    	}
+    	catch (SQLException e)
+		{
+			throw new DBException(e, sql.toString());
+		}
+		finally
+		{
+			DB.close(rs, pstmt);
+			rs = null; pstmt = null;
+		}
+    	return cd;
 	}
 }	//	MCostDetail
