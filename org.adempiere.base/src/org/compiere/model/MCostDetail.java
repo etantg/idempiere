@@ -1464,17 +1464,14 @@ public class MCostDetail extends X_M_CostDetail
 					if (mpo.getC_InvoiceLine_ID() == getC_InvoiceLine_ID() 
 							&& mpo.getDateAcct().compareTo(getDateAcct()) == 0
 							&& mpo.getQty().compareTo(il.getQtyInvoiced()) != 0) { 
-						// get the cost info from previous cost detail
-						StringBuilder whereClause = new StringBuilder();
-						whereClause.append("TRUNC(DateAcct) = "+DB.TO_DATE(getDateAcct(), true));
-						whereClause.append(" AND M_Product_ID = ?");
-						whereClause.append(" AND M_AttributeSetInstance_ID = ?");
-						whereClause.append(" AND C_AcctSchema_ID = ?");
-						whereClause.append(" AND M_CostDetail_ID < ?");
-						cd = new Query(as.getCtx(), I_M_CostDetail.Table_Name, whereClause.toString(), get_TrxName())
-								.setParameters(product.get_ID(), M_ASI_ID, as.get_ID(), this.get_ID())
-								.setOrderBy("M_CostDetail_ID DESC")
-								.first();
+						// get the last cost detail from the cost history
+						MCostHistory costHistory = MCostHistory.get(getCtx(), getAD_Client_ID(), Org_ID,
+			                    getM_Product_ID(), as.getM_CostType_ID(), as.getC_AcctSchema_ID(),
+			                    as.getCostingMethod(), ce.getM_CostElement_ID(), M_ASI_ID,
+			                    getDateAcct(), get_TrxName());
+						if (costHistory != null) {
+							cd = new MCostDetail(as.getCtx(), costHistory.getM_CostDetail_ID(), get_TrxName());
+						}
 						break;
 					}
 				}

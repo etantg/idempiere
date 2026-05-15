@@ -5368,6 +5368,19 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 		}	
 	}
 	
+	/**
+	 * PO
+	 * 	Line1, Product1, Qty=100
+	 * 	Line2, Product2, Qty=100
+	 * PI
+	 * 	Line1, Product1, Qty=100
+	 * 	Line2, Product2, Qty=100
+	 * MR
+	 * 	Line1, Product1, Qty=35
+	 * 	Line2, Product1, Qty=50
+	 * 	Line3, Product2, Qty=50
+	 * 	Line4, Product2, Qty=50
+	 */
 	@Test
 	public void testMRWithMultiProductLine() {
 		MAcctSchema[] ass = MAcctSchema.getClientAcctSchema(Env.getCtx(), getAD_Client_ID());
@@ -9858,6 +9871,118 @@ public class BackDateAveragePOCostingTest extends AbstractTestCase {
 			rollback();
 			resetAcctSchema(ass, backDateDays);
 		}
+	}
+	
+	/**
+	 * IDEMPIERE-6832
+	 * PO Qty=75, Price=23.2896 (EUR)
+	 * PI1 Qty=34, Price=23.2896, Date1
+	 * PI2 Qty=41, Price=23.2896, Date2
+	 * MR1 Qty=40, Current Date
+	 * MR2 Qty=1, Current Date, CostQty=41
+	 */
+	@Test
+	public void testMultiInvoiceMRInEUR() {
+		MAcctSchema[] ass = MAcctSchema.getClientAcctSchema(Env.getCtx(), getAD_Client_ID());
+		MClientInfo ci = MClientInfo.get(Env.getCtx(), getAD_Client_ID(), null); 
+		MAcctSchema as = ci.getMAcctSchema1();
+
+		int[] backDateDays = new int[ass.length];
+		try (MockedStatic<MProduct> productMock = mockStatic(MProduct.class)) {
+			backDateDays = configureAcctSchema(ass);
+			
+			MProduct product = new MProduct(Env.getCtx(), 0, getTrxName());
+			product.setM_Product_Category_ID(DictionaryIDs.M_Product_Category.STANDARD.id);
+			product.setName("testMultiInvoiceMRInEUR");
+			product.setProductType(MProduct.PRODUCTTYPE_Item);
+			product.setIsStocked(true);
+			product.setIsSold(true);
+			product.setIsPurchased(true);
+			product.setC_UOM_ID(DictionaryIDs.C_UOM.EACH.id);
+			product.setC_TaxCategory_ID(DictionaryIDs.C_TaxCategory.STANDARD.id);
+			product.saveEx();
+			product.set_TrxName(getTrxName());
+			
+			BigDecimal price = new BigDecimal(23.2896);
+			MPriceListVersion plv1 = MPriceList.get(DictionaryIDs.M_PriceList.IMPORT.id).getPriceListVersion(null);
+			MProductPrice pp1 = new MProductPrice(Env.getCtx(), 0, getTrxName());
+			pp1.setM_PriceList_Version_ID(plv1.getM_PriceList_Version_ID());
+			pp1.setM_Product_ID(product.get_ID());
+			pp1.setPriceStd(price);
+			pp1.setPriceList(price);
+			pp1.saveEx();
+			
+			MPriceListVersion plv2 = MPriceList.get(DictionaryIDs.M_PriceList.EXPORT.id).getPriceListVersion(null);
+			MProductPrice pp2 = new MProductPrice(Env.getCtx(), 0, getTrxName());
+			pp2.setM_PriceList_Version_ID(plv2.getM_PriceList_Version_ID());
+			pp2.setM_Product_ID(product.get_ID());
+			pp2.setPriceStd(price);
+			pp2.setPriceList(price);
+			pp2.saveEx();
+			mockProductGet(productMock, product);
+
+			Timestamp today = TimeUtil.getDay(System.currentTimeMillis());
+			Calendar cal = Calendar.getInstance();
+			cal.setTimeInMillis(today.getTime());
+			cal.add(Calendar.DAY_OF_MONTH, -2);
+			Timestamp backDate1 = new Timestamp(cal.getTimeInMillis());
+			cal.setTimeInMillis(today.getTime());
+			cal.add(Calendar.DAY_OF_MONTH, -1);
+			Timestamp backDate2  = new Timestamp(cal.getTimeInMillis());
+			
+			// Purchase Order
+			MOrder order = new MOrder(Env.getCtx(), 0, getTrxName());
+			order.setBPartner(MBPartner.get(Env.getCtx(), DictionaryIDs.C_BPartner.PATIO.id));
+			order.setC_DocTypeTarget_ID(DictionaryIDs.C_DocType.PURCHASE_ORDER.id);
+			order.setM_PriceList_ID(DictionaryIDs.M_PriceList.IMPORT.id);
+			order.setC_Currency_ID(DictionaryIDs.C_Currency.EUR.id);
+			order.setIsSOTrx(false);
+			order.setSalesRep_ID(DictionaryIDs.AD_User.GARDEN_ADMIN.id);
+			order.setDocStatus(DocAction.STATUS_Drafted);
+			order.setDocAction(DocAction.ACTION_Complete);
+			order.setDateAcct(backDate1);
+			order.setDateOrdered(backDate1);
+			order.setDatePromised(backDate1);		
+			order.saveEx();
+
+			MOrderLine orderLine = new MOrderLine(order);
+			orderLine.setLine(10);
+			orderLine.setProduct(product);
+			orderLine.setQty(new BigDecimal(75));
+			orderLine.setDatePromised(backDate1);
+			orderLine.setPrice(new BigDecimal(23.2896));
+			orderLine.saveEx();
+			
+			ProcessInfo info = MWorkflow.runDocumentActionWorkflow(order, DocAction.ACTION_Complete);
+			order.load(getTrxName());
+			assertFalse(info.isError(), info.getSummary());
+			assertEquals(DocAction.STATUS_Completed, order.getDocStatus());
+
+			// PI1
+			createInvoiceForPO(orderLine, backDate1, new BigDecimal(34));
+			
+			// PI2
+			createInvoiceForPO(orderLine, backDate2, new BigDecimal(41));
+			
+			// MR1
+			createMRForPO(orderLine, today, new BigDecimal(40));
+			product.set_TrxName(getTrxName());
+			MCost cost = product.getCostingRecord(as, getAD_Org_ID(), 0, as.getCostingMethod());
+			assertNotNull(cost, "No MCost record found");			
+ 			assertEquals(new BigDecimal("40").setScale(2, RoundingMode.HALF_UP), cost.getCurrentQty().setScale(2, RoundingMode.HALF_UP), "Unexpected current quantity");
+			validateProductCostQty(ass, product);
+			
+			// MR2
+			createMRForPO(orderLine, today, new BigDecimal(1));
+			product.set_TrxName(getTrxName());
+			cost.load(getTrxName());		
+ 			assertEquals(new BigDecimal("41").setScale(2, RoundingMode.HALF_UP), cost.getCurrentQty().setScale(2, RoundingMode.HALF_UP), "Unexpected current quantity");
+			validateProductCostQty(ass, product);
+		} finally {
+			rollback();
+			resetAcctSchema(ass, backDateDays);
+		}
+		
 	}
 	
 	private MProduct createProduct(String name, BigDecimal price) {
